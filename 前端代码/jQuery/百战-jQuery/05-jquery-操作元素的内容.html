@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<title>操作元素HTML</title>
+		<meta charset="UTF-8"/>
+		<!--引入jQuery文件-->
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--
+			jquery 操作元素内容学习：
+				获取元素对象
+					1、获取
+						对象名.html()//返回当前对象的所有内容，包括HTML标签。
+						对象名.text()//返回当前对象的文本内容，不包括HTML标签
+					2、修改
+						对象名.html("新的内容")//新的内容会将原有内容覆盖，HTML标签会被解析执行
+						对象名.text("新的内容")//新的内容会将原有内容覆盖，HTML标签不会被解析
+		-->
+		<!--声明js代码域-->
+		<script type="text/javascript">
+			//声明函数
+			function testHtml(){
+				//获取元素对象
+					var showdiv=$("#showdiv");
+				//获取元素的内容
+					alert(showdiv.html());
+			}
+			
+			function testHtml2(){
+				//获取元素对象
+				var showdiv=$("#showdiv");
+				//修改元素内容
+				showdiv.html(showdiv.html()+"<i>今天天气真好，适合抓鬼子</i>");
+			}
+			
+			function testText(){
+				//获取元素对象
+				var showdiv=$("#showdiv");
+				//获取元素内容
+				alert(showdiv.text());
+			}
+			
+			function testText2(){
+				//获取元素对象
+				var showdiv=$("#showdiv");
+				//修改元素内容
+				showdiv.text("<i>今天天气真好，适合抓鬼子</i>");
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<h3>操作元素HTML</h3>
+		<input type="button" name="" id="" value="测试获取元素内容--html()" onclick="testHtml()" />
+		<input type="button" name="" id="" value="测试修改元素内容--html()" onclick="testHtml2()" />
+		<input type="button" name="" id="" value="测试获取元素内容--text()" onclick="testText()" />
+		<input type="button" name="" id="" value="测试修改元素内容--text()" onclick="testText2()" />
+		<div id="showdiv">
+			<b>皇军，前面有八路的干活</b>
+		</div>
+	</body>
+</html>

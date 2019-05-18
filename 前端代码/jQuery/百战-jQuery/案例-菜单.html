@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<title>菜单案例</title>
+		<meta charset="UTF-8"/>
+		<!--声明css-->
+		<style type="text/css">
+			ul li{
+				list-style-type: none;	
+			}
+			#na{
+				position: relative;
+				left: 20px;
+			}	
+		</style>
+		<!--引入jQuery文件-->
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--声明js代码域-->
+		<script type="text/javascript">
+			var  flag=false;
+			//页面载入
+			$(function(){
+				$("ul>label").bind("mouseover",function(){
+					/*if(flag){
+						$("#na").slideUp(1000);
+						$("#naImg").attr("src","img/close.gif");
+						flag=true;
+					}else{*/
+						$("#na").slideDown("fast");
+						$("#naImg").attr("src","img/open.gif");
+						//flag=true;
+				});
+				$("ul>label").bind("mouseout",function(){
+					//if(flag){
+						$("#na").slideUp("normal");
+						$("#naImg").attr("src","img/close.gif");
+						//flag=true;
+					/*}else{
+						$("#na").slideDown(1000);
+						$("#naImg").attr("src","img/open.gif");
+						flag=true;
+					}*/
+				});
+			})	
+		</script>
+	</head>
+	<body>
+		<h3>jQuery-菜单案例</h3>
+		<hr />
+		<ul>
+			<img src="img/open.gif" id="naImg"/>&nbsp;&nbsp;<label for="">国际动态</label>
+			<div id="na" style="display: none;">
+				<li><img src="img/item.gif" alt="" /><label for="">国内新闻</label></li>
+				<li><img src="img/item.gif" alt="" /><label for="">国际新闻</label></li>
+			</div>
+		</ul>
+		<div id="div01" style="height: 100px;width: 100px; background-color: royalblue; display: none;">
+			
+		</div>
+		<div id="div01" style="height: 100px;width: 100px; background-color: orange;">
+			
+		</div>
+		
+		
+	</body>
+</html>

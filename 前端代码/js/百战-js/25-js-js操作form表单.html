@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<title>js操作form表单</title>
+		<meta charset="UTF-8"/>
+		<!--
+				js操作form:
+					获取form表单对象
+						使用id:var fm=document.getElementById("fm");
+						使用name属性:var frm=document.frm;
+					获取form下的所有表单元素对象集合
+						fm.elements
+					form表单的常用方法
+						表单对象.submit();//提交表单数据。
+					form的属性操作：
+						表单对象名.action="新的值"//动态的改变数据的提交路径
+						表单对象名.method="新的值"//动态的改变提交方式
+				js表单元素的通用属性
+					只读模式:
+						readonly="readonly"//不可以更改，但是数据可以提交
+					关闭模式：
+						disabled="disabled"//不可以进行任何的操作，数据不会提交。
+		-->
+		<script type="text/javascript">
+			//
+			function testForm(){
+				//获取form表对象
+					var fm=document.getElementById("fm");
+					//alert(fm);
+				//使用form表单的name属性值来获取
+					var frm=document.frm;
+					//alert(frm===fm);
+				//获取form表单元素对象集合
+					//alert(fm.elements.length);
+				//form表单的常用方法
+					//fm.submit();很重要
+					fm.reset();
+				//form的属性操作
+					fm.action="http://www.baidu.com/s";
+			}
+		</script>
+	</head>
+	<body>
+		<h3>js操作form表单</h3>
+		<input type="button" name="" id="" value="测试操作form" onclick="testForm()" />
+		<hr />
+		<form action="#" method="get" id="fm" name="frm">
+		<b>用户名：</b><input type="text" name="uname" id="uname" value="" readonly="readonly"/><br /><br />
+			密码： <input type="password" name="pwd" id="pwd" value=""  disabled="disabled"/><br /><br />
+			<input type="submit" name="" id="" value="登录" />
+		</form>
+	</body>
+</html>

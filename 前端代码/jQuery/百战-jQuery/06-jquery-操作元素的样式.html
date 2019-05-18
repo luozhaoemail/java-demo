@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<title>操作元素样式</title>
+		<meta charset="UTF-8"/>
+		<!--声明css-->
+		<style type="text/css">
+			#showdiv{
+				width: 300px;
+				height: 300px;
+				border: solid 1px;	
+			}
+			.common{
+				width: 300px;
+				height: 300px;
+				border: solid 1px;	
+				background-color: blueviolet;
+			}
+			.dd{
+				font-size: 30px;
+				font-weight: bold;
+			}
+		</style>
+		<!--引入jQuery文件-->
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--
+			jquery操作元素的样式
+				1、使用css()
+						对象名.css("属性名")//返回当前属性的样式值
+						对象名.css("属性名","属性值")//增加、修改元素的样式
+						对象名.css({"样式名":"样式值","样式名":"样式值"……})//使用json传参，提升代码书写效率。
+				2、使用addClass()
+						对象名.addClass("类选则器名")//追加一个类样式
+						对象名.removeClass("类选择器 名")//删除一个指定的类样式
+				
+		-->
+		<!--声明js代码域-->
+		<script type="text/javascript">
+			//jQuery操作样式---css()
+				function testCss(){
+					//获取元素对象
+						var showdiv=$("#showdiv");
+					//操作样式--增加
+						showdiv.css("background-color","orange");
+					//操作样式--获取
+						alert(showdiv.css("width"));		
+				}
+			
+				function testCss2(){
+					//获取元素对象
+						var div=$("#div01");
+					//操作样式
+						div.css({"border":"solid 1px","width":"300px","height":"300px"});	
+				}
+			
+			//jquery操作样式--addClass()
+				function testAddClass(){
+					//获取元素对象
+						var div=$("#div01");
+					//操作元素样式
+						div.addClass("common");	
+				}
+				
+				function testAddClass2(){
+					//获取元素对象
+						var div=$("#div01");
+					//操作元素样式
+						div.addClass("dd");	
+				}
+			
+				function testRemoveClass(){
+					//获取元素对象
+						var div=$("#div01");
+					//删除元素样式
+						div.removeClass("dd");	
+				}	
+		</script>
+	</head>
+	<body>
+		<h3>操作元素样式</h3>
+		<input type="button" name="" id="" value="操作样式---css()" onclick="testCss()" />
+		<input type="button" name="" id="" value="操作样式---css()--json" onclick="testCss2()" />
+		<input type="button" name="" id="" value="操作样式---addClass()" onclick="testAddClass()" />
+		<input type="button" name="" id="" value="操作样式---addClass()--2" onclick="testAddClass2()" />
+		<input type="button" name="" id="" value="操作样式---removeClass" onclick="testRemoveClass()" />
+		<hr />
+		<div id="showdiv">
+	
+		</div>
+		<div id="div01" class="common dd">
+			我是div01
+		</div>
+	</body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<title>操作文档结构</title>
+		<meta charset="UTF-8"/>
+		<!--引入jQuery文件-->
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--
+			操作文档结构学习：
+				获取元素对象
+					1、内部插入
+						append("内容")				将指定的内容追加到对象的内部
+						appendTo(元素对象或者选择器)		将制定的元素对象追加到指定的对象内容
+						prepend()					将指定的内容追加到对象的内部的前面
+						prependTo()					将制定的元素对象追加到指定的对象内容前面
+			
+					2、外部插入
+						after					将指定的内容追加到指定的元素后面
+						before					将指定的内容追加到指定的元素前面
+						insertAfter				把所有匹配的元素插入到另一个、指定的元素元素集合的后面
+						insertBefore  			把所有匹配的元素插入到另一个、指定的元素元素集合的前面。
+					3、包裹
+					4、替换
+					5、删除
+						empty()
+					
+		-->
+		<!--声明js代码域-->
+		<script type="text/javascript">
+			//内部插入
+				function testAppend(){
+					//获取元素对象
+						var div=$("#showdiv");
+					//使用内部插入
+						div.append("<i>，饭</i>");
+				}
+				
+				function testAppendTo(){
+					//获取元素对象
+						var div=$("#showdiv");
+					//使用appendTo()
+						$("#u1").appendTo(div);	
+				}
+				
+				function testPrepend(){
+					//获取元素对象
+					var div=$("#showdiv");
+					//使用prepend()
+					div.prepend("<i>你好，</i>");
+				}
+			//外部插入
+				function testAfter(){
+					//获取元素对象
+						var div=$("#showdiv");
+					//使用after外部插入
+						div.after("<b>今天天气不错，适合学习</b>");
+					
+				}
+				function testBefore(){
+					//获取元素对象
+						var div=$("#showdiv");
+					//使用before外部插入
+						div.before("<b>今天天气不错，适合学习</b>")
+					
+				}
+				function testEmpty(){
+					$("#showdiv").empty()
+				}
+		</script>
+		<style type="text/css">
+			#showdiv{
+				width: 300px;
+				height: 300px;
+				border: solid 3px orange;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>操作文档结构</h3>
+		<input type="button" name="" id="" value="测试append" onclick="testAppend()" />
+		<input type="button" name="" id="" value="测试appenTo" onclick="testAppendTo()" />
+		<input type="button" name="" id="" value="测试prepend" onclick="testPrepend()" />
+		<hr />
+		<input type="button" name="" id="" value="测试after" onclick="testAfter()" />
+		<input type="button" name="" id="" value="测试before" onclick="testBefore()" />
+		<input type="button" name="" id="" value="测试删除--empty()" onclick="testEmpty()" />
+		<hr />
+		<u id="u1">每天下午都是充斥着面包浓浓的香味</u>
+		<div id="showdiv">
+			<b>今天中午吃什么</b>
+		</div>
+	</body>
+</html>

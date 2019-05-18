@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<title>操作事件</title>
+		<meta charset="UTF-8"/>
+		<!--引入jQuery文件-->
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--
+			jQuery动态操作事件 
+				元素对象.bind("事件名",fn)//动态的给指定的元素对象追加指定的事件及其监听的函数。
+				注意：
+					js中的是一次添加，多次添加时覆盖的效果
+					jQuery是追加的效果，可以实现给一个事件添加不同的监听函数。
+				元素对象.unBind("事件名")//移除指定的元素对象的指定事件
+					注意：js方式添加的事件不能移除。
+				元素对象.one("事件名",fn)//给指定的元素对象添加一次性事件，事件被触发执行一次即失效。
+					注意：可以给事件添加多个一次函数，unBind可以用来解绑
+				
+				页面载入事件
+					$(document).ready(fn);
+					页面载入成功后会调用传入的函数对象
+					注意：
+						此方式可以给页面载入动态的增加多个函数对象，不会被覆盖。
+		-->
+		<!--声明js代码域-->
+		<script type="text/javascript">
+			//js动态添加事件
+				function testThing(){
+					//获取元素对象
+					var btn=document.getElementById("btn");
+					//添加事件
+					btn.onclick=function(){
+						alert("我是js方式");
+					}
+				}
+			//jquery
+				//测试bind绑定
+				function testBind(){
+					$("#btn2").bind("click",function(){alert("我是bind绑定单击事件")});
+					$("#btn2").bind("click",function(){alert("我是bind绑定单击事件2w2222")});
+				}
+				//测试unBind解绑
+				function testUnfBind(){
+					$("#btn2").unbind("click");
+					
+				}
+				//测试one
+				function testOne(){
+					$("#btn3").one("click",function(){alert("我是one")});
+				}
+			//页面载入事件
+				//js方式
+					window.onload=function(){
+						alert("我是js方式页面加载");
+					}
+					window.onload=function(){
+						alert("我是js方式页面加载2222"); //覆盖前面的
+					}
+				//jquery方式
+					$(document).ready(function(){
+						alert("我是jQuery");
+					})
+					$(document).ready(function(){
+						alert("我是jQuery22222");  //不会覆盖，追加
+					})
+					
+		</script>
+	</head>
+	<body>
+		<h3>操作事件</h3>
+		<input type="button" name="" id="" value="测试js动态添加事件" onclick="testThing()"/>
+		<input type="button" name="" id="" value="测试jquery动态添加事件--bind" onclick="testBind()"/>
+		<input type="button" name="" id="" value="测试jquery动态解绑事件--unbind" onclick="testUnfBind()"/>
+		<input type="button" name="" id="" value="测试jquery动态解绑事件--one" onclick="testOne()"/>
+		<hr />
+		<input type="button" name="" id="btn" value="测试js" />
+		<input type="button" name="btn2" id="btn2" value="测试jQuery-bind" />
+		<input type="button" name="btn2" id="btn3" value="测试jQuery-one" />
+		
+	</body>
+</html>

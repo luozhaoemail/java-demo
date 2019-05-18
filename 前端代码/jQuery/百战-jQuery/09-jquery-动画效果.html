@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>动画效果</title>
+		<meta charset="UTF-8"/>
+		<!--引入jQuery文件-->
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--声明css代码域-->
+		<style type="text/css">
+			#showdiv{
+				height: 300px;
+				background-color: orange;
+				display: none;
+			}
+			#div01{
+				height: 300px;
+				background-color:#8A2BE2;
+			}	
+		</style>
+		<!--声明js代码域-->
+		<script type="text/javascript">
+			function test(){
+				$("#showdiv").show(3000);
+				$("#div01").hide(3000);
+				/*$("#showdiv").hide(3000);
+				$("#div01").show(3000);*/
+				$("div").toggle(3000);
+				$("#showdiv").slideDown(3000);
+				$("#div01").slideUp(2000);
+				$("#showdiv").fadeOut(3000);
+			}
+		</script>
+	</head>
+	<body onload="test()">
+		<div id="showdiv">
+			
+		</div>
+		<div id="div01">
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,119 @@
+<html>
+	<head>
+		<title>jquery的选择器</title>
+		<meta charset="UTF-8"/>
+		<!--
+			jquery的选择器学习：
+				基本选择器
+					id选择器
+					标签选择器
+					类选择器
+					组合选择器
+				层级选择器	
+				简单选择器
+				内容选择器
+				可见性选择器
+				属性选择器
+				子元素选择器
+				表单选择器
+				
+				注意：
+					jQuery中选择器获取的是存储了HTML元素对象的数组。
+					jquery获取的元素对象不能够直接使用js的内容，按照数组的取出方式将对象取出后可以使用js的内容。
+				jquery对我们提供了多种多样的选择器来选择需要操作的HTML元素对象。
+		-->
+		<!--引入jQuery文件-->
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--声明js代码域-->
+		<script type="text/javascript">
+			//id选择器  val()返回数组
+			function testId(){
+				//jquery--id
+				var inp=$("#uname");
+				alert(inp.val());
+			}
+			//标签选择器 value返回对象值
+			function testEle(){
+				var inps=$("input");
+				alert(inps[1].value);	
+			}
+			//类选择器
+			function testClass(){
+				var inps=$(".common");
+				alert(inps.length);
+			}
+			//组合选择器：
+			function testAll(){
+				var eles=$("h3,input");
+				alert(eles.length);
+			}
+			//测试子选择器
+			function testChild(){
+				var inps=$("#showdiv>input");
+				alert(inps.length);
+			}
+			//测试层级选择器
+			function testCj(){
+				var inp=$("input:first");
+				alert(inp.val());
+				
+			}
+			function testCj2(){
+				var tds=$("td:not(td[width])");
+				alert(tds.html());
+			}
+		</script>
+		<style type="text/css">
+			.common{}
+			div{
+				width: 300px;
+				height: 100px;
+				border: solid 2px orange;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<h3>jquery的选择器</h3>
+		<input type="button" name="" id="" value="测试id"  onclick="testId()" class="common"/>
+		<input type="button" name="" id="" value="测试标签选择器"  onclick="testEle()"/>
+		<input type="button" name="" id="" value="测试类选择器"  onclick="testClass()"/>
+		<input type="button" name="" id="" value="测试组合选择器"  onclick="testAll()"/>
+		<hr />
+		用户名: <input type="text" name="uname" id="uname" value="张三" class="common"/>
+		<hr />
+		<input type="button" name="" id="" value="测试子选择器" onclick="testChild()" />
+		<input type="button" name="" id="" value="测试层级选择器--first" onclick="testCj()" />
+		<input type="button" name="" id="" value="测试层级选择器--not" onclick="testCj2()" />
+		<hr />
+		<div id="showdiv">
+			<input type="text" name="" id="" value="" />
+			<input type="text" name="" id="" value="" />
+			<input type="text" name="" id="" value="" />
+			<input type="text" name="" id="" value="" />
+		</div>
+		<div id="">
+			<input type="text" name="" id="" value="" />
+			<input type="text" name="" id="" value="" />
+			<input type="text" name="" id="" value="" />
+			<input type="text" name="" id="" value="" />
+		</div>
+		<table border="1px" height="200px">
+			<tr>
+				<td width="100px"></td>
+				<td width="100px"></td>
+				<td width="100px"></td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+			</tr>
+		</table>
+	</body>
+</html>

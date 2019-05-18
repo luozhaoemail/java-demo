@@ -1,0 +1,150 @@
+<html>
+	<head>
+		<title>jQuery操作表格</title>
+		<meta charset="UTF-8"/>
+		<!--
+			jQuery学习的内容：
+				1、jQuery的封装原理（闭包，匿名自调用）
+				2、jQuery的选择器
+				3、jQuery操作元素的属性、内容、样式、文档结构
+				4、jQuery中的事件
+				5、jQuery中的动画
+				注意：
+					一定不要二合一操作
+				js、jQuery是动态的脚本语言，用来操作HTML的，让网页和用户之间互动
+				HTML用来格式化展示信息
+				CSS用来增加网页样式
+				都是由浏览器解析执行的
+			
+			注意：
+				所有的网页都是存储在服务器端，运行在浏览器端。
+				所有的网页都是服务器实时的根据请求发送给浏览器执行的。
+				所有的网页数据可以实现动态的拼接。
+		-->
+		<!--
+			1、jquery操作checkbox
+				操作checkbox的选择状态使用prop()方法
+					prop("checked")//返回选择的状态，选择返回true,未选返回false
+					prop("checked",true)//置为选择状态
+					prop("checked",false)//置为未选状态
+				使用each进行遍历
+					对象名.each(fn)//在遍历的时候会给每个对象默认执行fn函数
+					this表示js对象
+					$(this)表示jQuery对象
+				parents("标签名")//获取指定的上级元素对象
+				parent()
+			2、jQuery操作表格
+		-->		
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//实现全选
+				$(function(){
+					//给按钮绑定单击事件
+					$("#btn1").click(function(){
+						//实现全选
+						$("input[type='checkbox']").prop("checked",true);
+					});
+				})
+			//实现取消选择
+				$(function(){
+					//给按钮绑定事件
+					$("#btn2").click(function(){
+						//实现全不选
+						$("input[type='checkbox']").prop("checked",false);
+					})
+				})
+			//反选
+				$(function(){
+					//给按钮绑定事件
+					$("#btn3").click(function(){
+						$("input[type='checkbox']").each(function(){
+							//alert(this.checked);
+							$(this).prop("checked",!$(this).prop("checked"));
+						})
+					})					
+				})
+			//选择奇数行
+				$(function(){
+					$("#btn4").click(function(){
+						$("input[type=checkbox]:odd").prop("checked",true)
+					})
+				})
+			//隔行变色
+				$(function(){
+					$("#btn5").click(function(){
+						$("tr:odd").css("background-color","orange");
+					})
+				})
+			//删除选中的行
+				$(function(){
+					$("#btn6").click(function(){
+						$(":checkbox:checked").parents("tr").remove();
+					})
+					
+				})
+			//添加行---操作文档结构
+				$(function(){
+					$("#btn7").click(function(){
+						$("tr:last").after("<tr><td><input type='checkbox' name='chk' id='chk' value='' /></td><td>"+name+"</td><td>123</td><td>123</td><td>123</td><td>123</td></tr>");
+					})
+				})
+		</script>
+		<style type="text/css">
+			tr{
+				height: 35px;
+			}
+			td{
+				width: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>操作表格</h3>
+		<input type="button" name="" id="btn1" value="全选" />
+		<input type="button" name="" id="btn2" value="全不选" />
+		<input type="button" name="" id="btn3" value="反选" />
+		<input type="button" name="" id="btn4" value="选择奇数行" />
+		<input type="button" name="" id="btn5" value="隔行变色" />
+		<input type="button" name="" id="btn6" value="删除行" />
+		<input type="button" name="btn7" id="btn7" value="添加行" />
+		<hr />
+		<table  border="1px">
+			<tr>
+				<td><input type="checkbox" name="chk" id="chk" value="" /></td>
+				<td>12344</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="chk" id="chk" value="" /></td>
+				<td>12355</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="chk" id="chk" value="" /></td>
+				<td>12366</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="chk" id="chk" value="" /></td>
+				<td>12377</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+		</table>
+		
+		
+		
+		
+	</body>
+</html>

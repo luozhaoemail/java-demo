@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<title>操作表格</title>
+		<meta charset="UTF-8"/>
+		<style type="text/css">
+			tr{
+				height: 35px;
+			}
+			td{
+				width: 100px;
+			}	
+		</style>
+		<script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//隔行变色功能
+			$(function(){
+				$("#btn1").click(function(){
+					//获取所有的行对象
+					$("tr:odd").css("background-color","orange");
+				})
+			})
+			//全选
+			$(function(){
+				//获取被选中的checkbox对象
+				$("#btn2").click(function(){
+					$("input[type='checkbox']").prop("checked",true);
+				})
+			})
+			//取消全部选择
+			$(function(){
+				//获取被选中的checkbox对象
+				$("#btn3").click(function(){
+					$("input[type='checkbox']").prop("checked",false);
+				})
+				
+			})
+			//反选
+			$(function(){
+				$("#btn4").click(function(){
+					$("input[type='checkbox']").each(function(){
+						$(this).prop("checked",!$(this).prop("checked"));
+					});
+				})
+			})
+			//选择奇数行
+			$(function(){
+				$("#btn5").click(function(){
+					$("input[type='checkbox']:odd").prop("checked",true);
+				})
+				
+			})
+			//删除选择的行
+			$(function(){
+				$("#btn6").click(function(){
+					$(":checkbox:checked").each(function(){
+						$(this).parents("tr").remove();
+					})
+				})
+			})
+			//在最后一行添加新的行
+			$(function(){
+				$("#btn7").click(function(){
+					$("tr:last").after("<tr><td><input type='checkbox' name='chk' id='chk' value=''/></td><td>126666</td><td>12</td><td>12</td><td>12</td><td>12</td></tr>");
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<h3>操作表格</h3>
+		<input type="button" name="" id="btn1" value="隔行变色" />
+		<input type="button" name="" id="btn2" value="全选" />
+		<input type="button" name="" id="btn3" value="取消全选" />
+		<input type="button" name="" id="btn4" value="反选" />
+		<input type="button" name="" id="btn5" value="选择奇数行" />
+		<input type="button" name="" id="btn6" value="删除选择行" />
+		<input type="button" name="" id="btn7" value="添加行" />
+		<hr />
+		<table border="1px">
+			<tr id="tr1">
+				<td><input type="checkbox" name="chk" id="chk" value="" /></td>
+				<td>12333</td>
+				<td>12</td>
+				<td>12</td>
+				<td>12</td>
+				<td>12</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="chk" id="chk" value="" /></td>
+				<td>124444</td>
+				<td>12</td>
+				<td>12</td>
+				<td>12</td>
+				<td>12</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="chk" id="chk" value="" /></td>
+				<td>12555</td>
+				<td>12</td>
+				<td>12</td>
+				<td>12</td>
+				<td>12</td>
+			</tr>
+			<tr>
+				<td><input type='checkbox' name='chk' id='chk' value=''/></td>
+				<td>126666</td>
+				<td>12</td>
+				<td>12</td>
+				<td>12</td>
+				<td>12</td>
+			</tr>
+		</table>
+	</body>
+</html>
