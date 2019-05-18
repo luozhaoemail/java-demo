@@ -1,0 +1,24 @@
+apt-get install vsftpd
+service vsftpd status
+vsftpd -version
+新建一个文件夹用于FTP的工作目录：  mkdir /home/ftp
+创建用户名：useradd -d /home/ftp -s /bin/bash lzftp
+设置密码： passwd lzftp
+vim /etc/vsftpd.conf 文件
+设置属性值
+anonymous_enable=NO #禁止匿名访问
+local_enable=YES
+write_enable =YES 
+
+删除 rm /etc/pam.d/vsftpd
+service vsftpd start
+
+ubuntu/debian安装vsftpd提示530 Login incorrect
+解决如下：
+这是因为ubuntu启用了PAM,所在用到vsftp时需要用到 /etc/pam.d/vsftpd 这个文件（默认源码安装的不会有这个文件），因此除了匿名用户外本地用户无法登录。
+所以只要删除了就可以了。sudo rm /etc/pam.d/vsftpd
+
+
+iptables  -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT --to-source 公网IP
+iptables  -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT --to-source 222.182.103.176
+

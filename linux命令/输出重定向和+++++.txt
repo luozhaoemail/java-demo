@@ -1,0 +1,41 @@
+输出重定向>和>>
+> 是定向输出到文件，如果文件不存在，就创建文件；如果文件存在，就将其清空；
+
+>>这个是将输出内容追加到目标文件中。如果文件不存在，就创建文件；如果文件存在，则将新的内容追加到那个文件的末尾，该文件中的原有内容不受影响
+
+Linux重定向中&>和>&是一个意思:复制一个文件描述符
+标准输入(stdin) 代码为 0 ，实际映射关系：/dev/stdin -> /proc/self/fd/0 
+标准输出(stdout)代码为 1 ， 实际映射关系：/dev/stdout -> /proc/self/fd/1
+标准错误输出(stderr)代码为 2 ，实际映射关系： /dev/stderr ->/pro/self/fd/2
+
+如：正常输出和错误信息都不显示，把标准输出和标准错误都重定向到/dev/null
+ls 1>/dev/null 2>/dev/null
+nohup spark-submit --driver-memory 6g --class com.lc.xdr.control.Processor  realtime_xdr.jar config/ >./realtime.log 2>&1 &
+
+1.  > 和 < 分别代表重定向的方向，是从左到右还是从右到左
+2.  >> 和 << 代表追加，也就是不改变重定向目标文件原有的内容，追加在后面。
+#举例： 将执行 "ls -lag" 命令的结果追加到文件 lee.dat 中
+ls -lag >> lee.dat
+
+3.  >&n 使用系统调用 dup (2) 复制文件描述符 n 并把结果用作标准输出；
+4.  <&n 标准输入复制自文件描述符 n；
+#举例： 让标准错误输出和标准输入一样都被存入到文件中
+find /home -name lee* > all_lee 2>& 1
+
+5.  n<&- 表示将 n 号输入关闭    
+6.  <&- 表示关闭标准输入（键盘）   
+7.  n>&- 表示将 n 号输出关闭   
+8.  >&- 表示将标准输出关闭
+#举例： 关闭 1 ，2 文件描述符
+ls test.sh test1.sh  1>&- 2>&-
+
+
+curl是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载
+curl [option] [url]
+
+curl http://www.linux.com	显示在屏幕上
+curl http://www.linux.com >> linux.html 重定向保存访问的网页
+curl -x 192.168.100.100:1080 http://www.linux.com 	指定proxy服务器以及其端口
+curl -c cookiec.txt  http://www.linux.com	保存http的response里面的cookie信息
+curl -o dodo1.jpg http:www.linux.com/dodo1.JPG	利用curl下载文件
+curl -O http://www.linux.com/dodo[1-5].JPG	循环下载

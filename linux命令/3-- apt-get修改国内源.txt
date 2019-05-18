@@ -1,0 +1,132 @@
+今天刚装上Ubuntu Server 12，默认的apt-get源比较慢。更改一下源地址。
+
+方法：
+
+1、修改源地址：
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+vim /etc/apt/sources.list
+
+deb http://mirrors.cqupt.edu.cn/ubuntu
+deb http://mirrors.163.com/debian jessie main contrib non-free
+
+重邮源：
+deb http://mirrors.cqupt.edu.cn/ubuntu/ wily main restricted universe multiverse  
+deb http://mirrors.cqupt.edu.cn/ubuntu/ wily-security main restricted universe multiverse  
+deb http://mirrors.cqupt.edu.cn/ubuntu/ wily-updates main restricted universe multiverse  
+deb http://mirrors.cqupt.edu.cn/ubuntu/ wily-proposed main restricted universe multiverse  
+deb http://mirrors.cqupt.edu.cn/ubuntu/ wily-backports main restricted universe multiverse  
+deb-src http://mirrors.cqupt.edu.cn/ubuntu/ wily main restricted universe multiverse  
+deb-src http://mirrors.cqupt.edu.cn/ubuntu/ wily-security main restricted universe multiverse  
+deb-src http://mirrors.cqupt.edu.cn/ubuntu/ wily-updates main restricted universe multiverse  
+deb-src http://mirrors.cqupt.edu.cn/ubuntu/ wily-proposed main restricted universe multiverse  
+deb-src http://mirrors.cqupt.edu.cn/ubuntu/ wily-backports main restricted universe multiverse
+
+重大源：
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.cqu.edu.cn/ubuntu/ xenial main restricted universe multiverse
+# deb-src https://mirrors.cqu.edu.cn/ubuntu/ xenial main restricted universe multiverse
+deb https://mirrors.cqu.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
+# deb-src https://mirrors.cqu.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
+deb https://mirrors.cqu.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
+# deb-src https://mirrors.cqu.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
+deb https://mirrors.cqu.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
+# deb-src https://mirrors.cqu.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
+其实只需要前两条：
+deb https://mirrors.cqu.edu.cn/ubuntu/ xenial main restricted universe multiverse
+deb https://mirrors.cqu.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
+
+比较快的源：
+
+搜狐源：
+deb http://mirrors.sohu.com/ubuntu/ precise-updates main restricted
+deb-src http://mirrors.sohu.com/ubuntu/ precise-updates main restricted
+deb http://mirrors.sohu.com/ubuntu/ precise universe
+deb-src http://mirrors.sohu.com/ubuntu/ precise universe
+deb http://mirrors.sohu.com/ubuntu/ precise-updates universe
+deb-src http://mirrors.sohu.com/ubuntu/ precise-updates universe
+deb http://mirrors.sohu.com/ubuntu/ precise multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ precise multiverse
+deb http://mirrors.sohu.com/ubuntu/ precise-updates multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ precise-updates multiverse
+deb http://mirrors.sohu.com/ubuntu/ precise-backports main restricted universe multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ precise-backports main restricted universe multiverse
+
+网易源：
+
+deb http://mirrors.163.com/ubuntu/ precise-updates main restricted
+deb-src http://mirrors.163.com/ubuntu/ precise-updates main restricted
+deb http://mirrors.163.com/ubuntu/ precise universe
+deb-src http://mirrors.163.com/ubuntu/ precise universe
+deb http://mirrors.163.com/ubuntu/ precise-updates universe
+deb-src http://mirrors.163.com/ubuntu/ precise-updates universe
+deb http://mirrors.163.com/ubuntu/ precise multiverse
+deb-src http://mirrors.163.com/ubuntu/ precise multiverse
+deb http://mirrors.163.com/ubuntu/ precise-updates multiverse
+deb-src http://mirrors.163.com/ubuntu/ precise-updates multiverse
+deb http://mirrors.163.com/ubuntu/ precise-backports main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ precise-backports main restricted universe multiverse
+
+阿里：
+deb http://mirrors.aliyun.com/debian/ stretch main non-free contrib
+deb-src http://mirrors.aliyun.com/debian/ stretch main non-free contrib
+deb http://mirrors.aliyun.com/debian-security stretch/updates main
+deb-src http://mirrors.aliyun.com/debian-security stretch/updates main
+deb http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib
+deb-src http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib
+deb http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib
+deb-src http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib
+
+清华：
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch main contrib non-free
+deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch main contrib non-free
+只用前两条。测试这个最快
+
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-updates main contrib non-free
+deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-updates main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-backports main contrib non-free
+deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-backports main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security/ stretch/updates main contrib non-free
+deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security/ stretch/updates main contrib non-free
+
+清华源：ubuntu16.04LTS xenial版本
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
+#deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
+
+最后更新看看速度：
+
+sudo apt-get update
+sudo apt-get upgrade
+
+若更新失败：
+rm /var/lib/apt/lists/lock
+apt-get clean
+apt-get update
+
+代理
+export http_proxy=http://172.23.22.217:808 
+unset https_proxy
+apt-get update
+apt-get install net-tools
+apt-get install vim
+
+
+*********************************************
+centos7修改为阿里的yum源
+1. 备份本地yum源
+ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak 
+ 
+2.获取阿里yum源配置文件
+ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 
+
+3.更新cache
+ yum makecache  
+ 
+4.查看
+ yum -y update 

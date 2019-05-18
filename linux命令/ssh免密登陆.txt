@@ -1,0 +1,37 @@
+设置ssh免登录:
+1.生成ssh密码的命令，-t 参数表示生成算法，有rsa和dsa两种；-P表示使用的密码，这里使用“”空字符串表示无密码。直接回车。
+ssh-keygen -t rsa -P ""
+
+2.将生成的密钥写入authorized_keys文件。
+  cat .ssh/id_rsa.pub >>.ssh/authorized_keys  
+#等价于
+  ssh-copy-id localhost 
+ 
+3.将.ssh目录拷贝到其它主机相同目录下。
+scp -r ~/.ssh root@192.168.1.91:~/
+scp -r ~/.ssh root@192.168.1.92:~/
+#等价于
+	ssh-copy-id 192.168.1.91
+	ssh-copy-id 192.168.1.92
+
+------------------
+sshd服务配置：
+service ssh restart 或 /etc/init.d/sshd restart 
+vim  /etc/ssh/sshd_config
+
+1.SSH设了无密码登录还无效的原因：配置文件中路径错误，读不到公钥
+AuthorizedKeysFile  ~/.ssh/authorized_keys
+
+2.设置允许root远程登录
+vim /etc/ssh/sshd_config文件，将PermitRootLogin 的值改为yes
+
+
+
+localhost: Warning: Permanently added 'localhost' (ECDSA) to the list of known hosts.
+修改配置文件 /etc/ssh/ssh_config 或者$HOME/.ssh/config
+添加如下两行配置：
+StrictHostKeyChecking no
+UserKnownHostsFile /dev/null  或者
+UserKnownHostsFile ~/.ssh/known_hosts
+
+

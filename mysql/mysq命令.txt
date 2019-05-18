@@ -1,0 +1,88 @@
+apt-get update更新源
+apt-get install mysql-server
+apt-get isntall mysql-client
+
+检查mysql 的socket处于 listen 状态则表示安装成功。
+netstat -tap | grep mysql
+ 
+启动：  
+/ect/init.d/mysql start (前面为mysql的安装路径) restart shutdown 
+
+登陆mysql数据库 u 用户名， p 密码  -h主机名， -P端口
+mysql -u root -p 
+mysql -u root -proot
+mysql -h a1 -uroot -proot
+mysql -h 192.168.0.201 -P 3306 -uroot -proot
+
+mysql -V
+
+***************************
+***************************
+Ubuntu16.04 mysql 禁止自启动:
+update-rc.d mysql disable
+
+#禁止启动
+sudo systemctl disable mysql
+#开机启动
+sudo systemctl enable mysql
+
+重启生效
+/ect/init.d/mysql status
+***************************
+***************************
+
+查看数据库 show databases；
+
+create database 库名;
+use 库名；
+create table 表名 (字段设定列表)；
+
+
+hadoop-daemon.sh start namenode
+hadoop-daemon.sh start datanode
+hadoop-daemon.sh start secondarynamenode
+hadoop-daemon.sh stop namenode
+hadoop-daemon.sh stop datanode
+hadoop-daemon.sh stop secondarynamenode
+start-dfs.sh  tart-yarn.sh  start-all.sh
+
+关键字查看文件
+find  -name '*record*'
+ cp support-files/my-medium.cnf /etc/my.cnf
+ cp support-files/mysql.server /etc/init.d/mysql.server
+
+
+ubuntu下mysql安装布局:
+/usr/bin                 客户端程序和脚本  
+/usr/sbin                mysqld 服务器  
+/var/lib/mysql           日志文件，数据库  ［重点要知道这个］  
+/usr/share/doc/packages  文档  
+/usr/include/mysql       包含( 头) 文件  
+/usr/lib/mysql           库  
+/usr/share/mysql         错误消息和字符集文件  
+/usr/share/sql-bench     基准程序  
+
+
+再shell里面直接输入：
+    1.导出整个数据库 
+　　mysqldump -u用户名 -p密码  数据库名 > 导出的文件名 
+　　C:\Users\jack> mysqldump -uroot -pmysql sva_rec  > e:\sva_rec.sql 
+
+　　2.导出一个表，包括表结构和数据 
+　　mysqldump -u用户名 -p 密码  数据库名 表名> 导出的文件名 
+　　C:\Users\jack> mysqldump -uroot -pmysql sva_rec date_rec_drv> e:\date_rec_drv.sql 
+
+　　3.导出一个数据库结构 
+　　C:\Users\jack> mysqldump -uroot -pmysql -d sva_rec > e:\sva_rec.sql 
+
+    4.导出一个表，只有表结构 
+　　mysqldump -u用户名 -p 密码 -d数据库名  表名> 导出的文件名 
+　　C:\Users\jack> mysqldump -uroot -pmysql -d sva_rec date_rec_drv> e:\date_rec_drv.sql 
+
+　　5.导入数据库 
+　　常用source 命令 
+　　进入mysql数据库控制台， 
+　　如mysql -u root -p 
+　　mysql>use 数据库 
+　　然后使用source命令，后面参数为脚本文件(如这里用到的.sql) 
+　　mysql>source d:wcnc_db.sql

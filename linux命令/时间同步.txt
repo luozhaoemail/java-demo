@@ -1,0 +1,106 @@
+查看时区:date -R
+Sat, 01 Dec 2018 05:37:26 +0800
+调整时区：tzselect
+或者：
+1、调整时区
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+linux提供是依据/etc/localtime文件内容知道目前系统的时区信息，这个文件一般是从/usr/share/zone/里面选择适当的时区复制过来就可以使用
+
+ 
+
+2、手动调整时间(需要ntpdate)  
+ 如果没有安装：报错：The program 'ntpdate' is currently not installed.
+ 没有安装ntpdate可以
+ yum install -y ntpdate
+ apt-get install ntp
+ apt-get install ntpdate
+
+ ntpq -p 查看网络中的NTP服务器
+ 0.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ 1.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ 2.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ 3.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ ntp.ubuntu.com  .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ 
+-------------------------------------
+NTP国内时钟服务器
+ntp1.aliyun.com
+ntp2.aliyun.com
+ntp3.aliyun.com
+ntp4.aliyun.com
+ntp5.aliyun.com
+ntp6.aliyun.com
+ntp7.aliyun.com
+ 
+Unix类系统：time1-7.aliyun.com
+Windows： time.pool.aliyun.com
+**************************
+ntpdate us.pool.ntp.org
+ntpdate -u cn.pool.ntp.org
+ntpdate time.windows.com
+报错：name server cannot be used:连不上网的原因
+
+如果不行手动修改：
+date -s "2018-11-30 22:23:50"
+保存到硬件时钟
+hwclock --systohc
+查看硬件时钟
+hwclock --show
+Sat 01 Dec 2018 06:31:07 AM CST  .186612 seconds
+
+
+
+3、加入定时计划任务，每天进行同步一次：
+cd /etc/cron.daily,在 目录中建立一个脚本ntpupdate，內容如下表所示：
+
+#! /bin/bash
+/usr/sbin/ntpdate -s us.pool.ntp.org
+/usr/sbin/hwclock --systohc
+
+
+
+********
+********
+手动同步
+ for i in $(seq 1 2);  do echo pve$i;  ssh pve$i "date -s 22:33:00";  done
+ for i in $(seq 1 2);  do echo pve$i;  ssh pve$i "date";  done
+ hwclock --systohc
+ 
+********
+********
+ntpdate [参数] server.xxx
+-u 	指定使用无特权的端口发送数据包。
+-s 	指定日志操作 syslog 设施的使用
+--------------------------------------
+
+
+clock和hwclock是一个命令
+hwclock [参数]... [+格式]
+-r, --show         读取并打印硬件时钟（read hardware clock and print result ）
+      -s, --hctosys      将硬件时钟同步到系统时钟（set the system time from the hardware clock ）
+      -w, --systohc     将系统时钟同步到硬件时钟（set the hardware clock to the current system time ）
+
+--adjust 　hwclock每次更改硬件时钟时，都会记录在/etc/adjtime文件中。使用--adjust参数，可使hwclock根据先前的记录来估算硬件时钟的偏差，并用来校正目前的硬件时钟。 
+      --debug 　显示hwclock执行时详细的信息。 
+      --directisa 　hwclock预设从/dev/rtc设备来存取硬件时钟。若无法存取时，可用此参数直接以I/O指令来存取硬件时钟。 
+      --hctosys 　将系统时钟调整为与目前的硬件时钟一致。 
+      --set --date=<日期与时间> 　设定硬件时钟。 
+      --show 　显示硬件时钟的时间与日期。 
+      --systohc 　将硬件时钟调整为与目前的系统时钟一致。 
+      --test 　仅测试程序，而不会实际更改硬件时钟。 
+      --utc 　若要使用格林威治时间，请加入此参数，hwclock会执行转换的工作。 
+      --version 　显示版本信息。
+	  
+	  
+	  
+在没有网的情况下集群时间同步：从节点不能联网，直接同步主节点的时间
+1.在主节点上
+ntpdate master   或ntpdate 10.107.18.35
+
+2 client节点启动ntpd服务
+systemctl start ntpd
+systemctl enable ntpd
+
+3 所有节点启动时间同步
+timedatectl set-ntp yes

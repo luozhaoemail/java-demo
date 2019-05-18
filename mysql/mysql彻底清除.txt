@@ -1,0 +1,9 @@
+apt-get remove --purge mysql-server
+apt-get remove mysql-server
+apt-get remove mysql-common
+
+然后再
+apt-get install mysql-server
+
+装完后 是无法远程访问的.要先修改sudo vim /etc/mysql/my.cnf
+找到 bind-address = 127.0.0.1注释掉.就ok了

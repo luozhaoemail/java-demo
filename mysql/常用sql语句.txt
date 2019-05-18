@@ -1,0 +1,62 @@
+create database abc CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+存入本地文件 
+select count(1) from table  into outfile '/tmp/test.xls'; 
+
+#前提目标表table2必须存在：
+将一个table1的数据的部分字段复制到table2中，或者将整个table1复制到table2中：
+insert into table2(f1,f2,...) select va1,va2,... from table1
+，还可以插入常量5：
+insert into table2(a, c, d) select a,c,5 from table1
+
+#前提目标表table2不存在：
+插入时会自动创建表table2，并将table1中指定字段数据复制到table2中：
+select va1, va2 into table2 from table1
+
+统计某个字段(t1.userinfocount )的次数
+sum(case when t1.provcode = 15 and t1.cominfo = 14 then t1.userinfocount else 0 end), -- 本地移动次数
+
+
+
+#mysql中变量不用事前申明，在用的时候直接用“@变量名”使用就可以了：
+set @num=1; 或set @num:=1; //这里要使用变量来保存数据，直接使用@num变量
+select @num:=字段名 from 表名 where ……
+注意使用set时可以用“=”或“：=”，但是使用select时必须用“：=赋值”。
+
+#prepare语句用于预备一个语句，并指定名称name，以后引用该语句。
+set @a=1; 
+prepare name from "select * from tbl limit ?";  --？表示位置保持符
+execute name using @a;
+
+set @skip=1; set @numrows=5;?
+prepare name from "select * from tbl limit ?, ?";? --从tb1表中返回第二到第六行
+execute name using @skip, @numrows;
+
+#order by和 group by 同时使用时，order by 子句中的列必须包含在聚合函数或 group by 子句中
+group by 比order by先执行，order by不会对group by 内部进行排序，如果group by后只有一条记录，那么order by 将无效。
+要查出group by中最大的或最小的某一字段使用 max或min函数。
+
+#四余五入函数round
+round(2.555)=3,round(2.555,2)=2.56  --表示以2位小数来四舍五入
+
+#转义字符\: \' 表示一个单引号'    \'aa\' 就是 'aa' 
+
+
+
+
+#left join on and 与 left join on where的区别：
+数据库在通过连接两张或多张表来返回记录时，都会生成一张中间的临时表，然后再将这张临时表返回给用户。
+      在使用left jion时，on和where条件的区别如下：
+1、 on条件是在生成临时表时使用的条件，它不管on中的条件是否为真，都会返回左边表中的记录。
+2、where条件是在临时表生成好后，再对临时表进行过滤的条件。这时已经没有left join的含义（必须返回左边表的记录）了，条件不为真的就全部过滤掉。    
+select * form tab1 left join tab2 on (tab1.size = tab2.size)   where  tab2.name='aaa’
+select * form tab1 left join tab2 on (tab1.size = tab2.size    and  tab2.name='aaa’)
+
+注意：left join,right join,full join具有特殊性，不管on上的条件是否为真都会返回left或right表中的记录，full则具有left和right的特性的并集。
+而inner jion没这个特殊性，则条件放在on中和where中，返回的结果集是相同的。
+ 即：    1. 对于left join，不管on后面跟什么条件，左表的数据全部查出来，因此要想过滤需把条件放到where后面
+         2. 对于inner join，满足on后面的条件表的数据才能查出，可以起到过滤作用。也可以把条件放到where后面。
+
+
+truncate table stu;清空表

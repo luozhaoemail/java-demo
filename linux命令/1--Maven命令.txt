@@ -1,0 +1,103 @@
+maven安装：
+直接下载安装包解压即可，然后配置环境变量
+export MVN_HOME=/opt/app/maven-3.6.0
+export PATH=$PATH:$MVN_HOME/bin
+
+配置：
+maven/conf目录下的settings.xml是全局有效的，最好复制到 ~/.m2 目录下，只对当前目录有效
+默认在用户当前目录新建本地仓库.m2，/root/.m2 或 ~/.m2 
+下载的依赖都在 .m2/repository/
+
+配置代理：
+	<proxy>
+      <id>lzproxy</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <username>lz</username>
+      <password>lz</password>
+      <host>172.23.22.215</host>
+      <port>808</port>
+      <!--指定不需要代理的主机 -->
+      <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+    </proxy>
+配置国内源：
+    <mirror>
+      <id>nexus-aliyun</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Nexus aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </mirror>
+	
+========================
+maven目录结构：
+hello-world	
+	pom.xml
+	src
+		--main
+			--java
+			--resource
+		--test
+			--java
+			--resource
+	target
+		maven01-0.0.1-SNAPSHOT.jar  --jar包目录在这里
+		classes			--编译后的字节码文件
+		maven-archiver  
+		maven-status  
+		surefire-reports
+		test-classes	--测试代码的字节码文件
+-------------------------------------------------		
+pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lc</groupId>		--公司名
+    <artifactId>maven01</artifactId>  --项目名
+    <version>0.0.1-SNAPSHOT</version>  --版本
+    <packaging>jar</packaging>		//输出形式为 maven01-0.0.1-SNAPSHOT.jar
+	//他们组成了包名： package com.lc.maven01;   HelloWorldTest.java 则是com.lc.maven01.HelloWorldTest
+
+    <dependencies>
+        <dependency>	
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.10</version>		//依赖包 junit-4.10.jar
+        </dependency>
+
+    </dependencies>
+</project>
+
+	
+			
+==============================			
+mvn -v：查看maven版本，包括jdk使用情况。
+mvn compile：编译项目，项目根目录生成target文件夹，里面存放classes项目编译的字节码文件，即项目运行的classpath。
+mvn test：运行测试用例，同时在target文件夹下生成测试classpath和测试报告。
+mvn package：将项目打包到target文件夹。
+mvn clean：删除target文件夹（target存放的是项目编译的字节码文件、测试字节码文件、测试报告及打包的项目）。
+mvn install：安装jar包到本地仓库中(/root/.m2/repository/com/lc/maven01/0.0.1-SNAPSHOT/maven01-0.0.1-SNAPSHOT.jar)，会先执行test命令，再执行install命令。
+
+他们是有先后的，后面的命令会自动执行前面的命令：
+mvn clean install  --会自动执行下面的三条
+mvn clean package
+mvn clean test
+mvn clean compile
+
+
+
+
+本机maven安装目录：
+C:\install\coding\intellijIDEA\plugins\maven\lib\maven3
+C:\Users\Administrator.luozhao-PC\.m2
+
+配置文件从C:\install\coding\intellijIDEA\plugins\maven\lib\maven3\conf\settings.xml 
+拷到C:\Users\Administrator.luozhao-PC\.m2\settings.xml 
+
+
+
+
+
+

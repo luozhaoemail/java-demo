@@ -1,0 +1,43 @@
+mysql -h 192.168.5.116 -P 3306 -u root -p123456
+mysql -h localhost -u root -p 
+
+Linux下配置Mysql允许远程访问详解
+1.进入 mysql：
+/usr/local/mysql/bin/mysql -u root -p
+
+2.使用 mysql库 ：
+use mysql;
+
+3.查看用户表 ：
+SELECT `Host`,`User` FROM user;
+
+4.更新用户表 ：
+UPDATE user SET Host = '%' WHERE User = 'root' LIMIT 1;
+
+5.强制刷新权限 ：
+flush privileges;
+
+完成以上步骤即可远程连接数据库了，上边关键的一句是
+UPDATE user SET `Host` = '%' WHERE `User` = 'root' LIMIT 1;
+
+其中%的意思是允许所有的ip远程访问，如果需要指定具体的某个ip就写上具体的ip即可
+
+
+报错：ERROR 2003 (HY000): Can't connect to MySQL server on '192.168.51.112' (111)
+gedit /etc/mysql/my.cnf 修改配置文件
+#skip-external-locking
+#bind-address        = 127.0.0.1
+skip-name-resolve
+找到 bind-address = 127.0.0.1注释掉这一行，即在行首加一个#表示注释。
+my.cnf是个连接文件，如果里面没有bind-address = 127.0.0.1，那么就去这个目录下改：/etc/mysql/mysql.conf.d/mysql.cnf
+
+
+方法2：授权法
+添加命令如下：
+    1）grant all on *.* to 用户名@"%" identified by "密码";
+    2）flush privileges;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH  GRANT OPTION;  
+
+
+授权：  grant all privileges on *.* to 'root'@'222.182.107.63' identified by 'Heyi@2016';
+撤销：  Delete FROM user Where User='root' and Host='113.251.163.248';

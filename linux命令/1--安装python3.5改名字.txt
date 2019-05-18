@@ -1,0 +1,12 @@
+ubuntu 16.04默认只安装了python3.5，
+在/usr/bin下面只有的python3的链接
+因此使用的时候要输入python3命令可以进入命令行
+但是spark识别不了python3，因此将该链接重命名即可：
+mv /usr/bin/python3 /usr/bin/python
+
+
+放到下面目录的软件具可以全局使用：
+/bin目录: 放置一些系统的必备执行档
+/usr/bin目录:放置一些应用软件工具的必备执行档
+/sbin目录: 放置一些系统管理的必备程序
+/usr/sbin目录: 放置一些网路管理的必备程序

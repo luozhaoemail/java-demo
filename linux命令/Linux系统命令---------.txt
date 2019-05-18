@@ -1,0 +1,215 @@
+# Linux 下 取进程占用 cpu 最高的前10个进程
+ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head
+
+# linux 下 取进程占用内存(MEM)最高的前10个进程
+ps aux|head -1;ps aux|grep -v PID|sort -rn -k +4|head
+
+软链接：生成文件的镜像，不会占用磁盘空间
+ln -s 源文件 目标文件
+ln -s /mnt/hgfs/proxmox/ /root/Desktop/ 注意要写绝对路径
+
+查看内存：
+free -m 以M单位显示
+free -g  以G单位显示
+
+查看磁盘空间占用情况：df -h
+du -ah : a表示显示目录下所有的文件和文件夹（不含子目录），h表示以人类能看懂的方式
+
+scalac -cp .; /opt/hadoop/spark-2.1.0-bin-hadoop2.7/jars/spark-core_2.11-2.1.0.jar  -d .  Wordcount.scala
+
+查看系统版本位数
+getconf LONG_BIT 
+64位
+
+uname -a  i686表示32位机器
+Linux a1 4.4.0-131-generic #157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+
+uname -p
+x86_64   
+
+查看ubuntu版本
+cat /etc/issue
+Ubuntu 16.04.5 LTS
+
+详细查看：lsb_release -a
+Distributor ID:	Ubuntu
+Description:	Ubuntu 16.04.5 LTS
+Release:	16.04
+Codename:	xenial
+
+查看debian版本：
+more /etc/debian_version
+
+查看CentOS操作系统型号：
+cat /etc/redhat-release
+显示：CentOS Linux release 7.4.1708 (Core)
+
+--------------------------------------------
+查看CPU：
+# 查看物理CPU个数
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+1
+
+# 查看每个物理CPU中core的个数(即核数)
+cat /proc/cpuinfo| grep "cpu cores"| uniq
+cpu cores	: 10
+
+# 查看逻辑CPU的个数
+cat /proc/cpuinfo| grep "processor"| wc -l
+--------------------------------------------
+10
+
+查看内存总数
+cat /proc/meminfo | grep MemTotal
+MemTotal:       10073844 kB	//9.60717G
+
+查看网卡千兆还是万兆
+lspci -vvv|grep Eth
+60:00.0 Ethernet controller: Intel Corporation Ethernet Connection X722 for 1GbE (rev 08)
+	Subsystem: Super Micro Computer Inc Ethernet Connection X722 for 1GbE
+
+*************************************
+
+解压：tar zxvf  kleandisk-2.1.tar.gz －C /home/cao
+
+时间同步：ntpdate ntp.sjtu.edu.cn
+
+查找文件名中包含某字符（如"elm"）的文件
+find /home/ -name '*elm*'
+
+压缩和解压命令：
+gzip 1 1.gz  
+gunzip 1.gz
+保留源文件的方法
+gzip -c 1 > 1.gz  
+gunzip -c 1.gz > 2
+
+
+------------------------
+安装rar压缩包
+apt install rar
+ 参数：
+ a             Add files to archive
+ e             Extract files without archived paths
+ x             Extract files with full path
+
+压缩 1.sh至1.ra
+rar a 1.rar  1.sh
+
+解压1.rar
+rar x 1.ra
+rar e 1.rar
+------------------------
+
+
+echo "4" > /opt/hadoop/zookeeper/myid
+
+开机启动管理：cd /etc/init.d/
+删除服务:update-rc.d -f apache2 remove # -f 为强制删除开机服务apache2 
+添加服务: update-rc.d apache2 defaults
+或者insserv -r apache2
+
+端口转发：iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8081 
+
+scp 1.txt root@117.187.23.166:/home/
+for i in $(seq 1 4);  do echo a$i; scp zoo.cfg root@a$i:/opt/zookeeper/conf ; done
+
+
+查看外网ip
+curl ipinfo.io  
+curl ip.cn
+
+Linux 查看进程和删除进程：ps 命令用于查看当前正在运行的进程，grep 是搜索。
+ps -aux 显示所有状态
+ps -aux | grep java
+
+检查端口：telnet 117.187.20.66 10002
+查看端口是否开放：netstat -atnp | grep 10002
+查看端口转发情况：iptables -t nat -nL
+
+vi 在Vi里面实现字符串的批量替换。
+a. 文件内全部替换：
+:%s#abc#def#g（用def替换文件中所有的abc）
+:%s#linuxidc.com#xwen.net#g (如文件内有#，可用/替换,比如:%s/linuxidc.com/xwen.net/g)
+
+b. 文件内局部替换：
+把10行到50行内的“abc”全部替换成“def”
+:10,50s#abc#def#g（如文件内有#，可用/替换,:%s/abc/def/g）
+以上命令如果在g后面再加上c，则会在替换之前显示提示符给用户确认（conform）是否需要替换。 比如
+:%s#linuxidc.com#linuxidc.net#gc
+
+
+scp 在脚本中使用输入密码的解决方法
+#! /usr/bin/expect -f
+spawn scp test.jar root@172.16.101.11:/root/  
+expect "*password:"
+send "Root123qwe123\r"
+expect eo
+
+
+Linux统计文件行数
+wc -lcw file1 file2
+c 统计字节数。
+l 统计行数。
+w 统计字数
+wc -l file1
+
+wc -l im.txt 显示：
+249116 im.txt
+
+
+1.先保存到磁盘，防止丢数据： sync 
+2.cache释放：
+To free pagecache:
+echo 1 > /proc/sys/vm/drop_caches
+
+To free dentries and inodes:
+echo 2 > /proc/sys/vm/drop_caches
+
+To free pagecache, dentries and inodes:
+echo 3 > /proc/sys/vm/drop_caches
+
+
+
+查看操作系统版本：lsb_release -a
+32位还是64位：	uname -a
+cat /proc/cpuinfo （Linux查看cpu相关信息，包括型号、主频、内核信息等）
+
+
+
+查看网卡硬件信息	lspci | grep -i 'eth'
+lspci -v | grep -A 10 -i ethernet
+
+查看内存详细使用	cat /proc/meminfo
+查看内存硬件信息	dmidecode -t memory
+cpu信息				cat /proc/cpuinfo
+cpu的统计信息		lscpu
+查看bios信息			dmidecode -t bios
+
+ip addr
+ip link
+
+
+
+查看硬盘和分区分布		lsblk
+看硬盘和分区的详细信息	fdisk -l
+查看使用率	df -h
+
+释放内存：
+暂时不用的内存转为buff/cache
+查看：
+free -h
+将所有正在内存中的缓冲区写到磁盘中
+sync
+释放内存(页缓存buff/cache)：
+echo 1 > /proc/sys/vm/drop_caches
+这里内存就释放完了，现在drop_caches中的值为1
+重新分配内存:
+echo 0 > /proc/sys/vm/drop_caches
+
+drop_caches的值可以是0-3之间的数字，代表不同的含义：
+0：不释放（系统默认值）
+1：释放页缓存
+2：释放dentries和inodes
+3：释放所有缓存
+echo 3 > /proc/sys/vm/drop_cache

@@ -1,0 +1,18 @@
+可以将命令写在sql脚本里
+use storm_test;
+
+load data infile '/opt/2.txt' into table tb fields terminated by ',';
+
+select * from tb;
+然后在mysql命令行里面source /opt/1.sql;就可以导入了
+
+
+
+
+导入本地文件报错：ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement
+解决：如果没有权限的话，就要文件拷贝/var/lib/mysql-files/下面，再去导入。
+因为新版msyql只允许去这个目录下导入文件
+
+windows下：
+msyql 数据库存储目录C:\ProgramData\MySQL\MySQL Server 5.7\data， 需要将文件放在这个目录下的对应数据库名字文件夹里面
+load data infile 'mfb_ip_locinfo_new.csv' into table mfb_ip_locinfo_new fields terminated by ',';

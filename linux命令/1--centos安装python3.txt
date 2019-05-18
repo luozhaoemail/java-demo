@@ -1,0 +1,43 @@
+安装python3，centos默认是python2.75
+python -V
+	Python 2.7.5
+which python 查看一下Python可执行文件的位置
+	/usr/bin/python
+	
+cd /usr/bin/
+命令查看 ll python*  ，发现python 指向的是python2.7
+python -> python2
+python2 -> python2.7
+python2.7
+
+先安装依赖包：
+yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make
+
+再下载python3安装包：
+wget http://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
+但是网速很慢，可以手动下载 Python-3.7.0.tgz
+
+解压：tar -zxvf  Python-3.7.0.tgz -C /opt
+cd /opt/Python-3.7.0
+然后开始编译安装
+./configure --prefix=/usr/local/python3		=后面表示指定编译安装的目录
+make && make install
+
+报错：ModuleNotFoundError: No module named '_ctypes'
+解决：3.7版本需要一个新的包libffi-devel，安装此包之后再次进行编译安装即可。
+yum install libffi-devel -y
+make install
+
+安装完毕，/usr/local/目录下就会有python3目录了
+/usr/local/python3
+建立软连接：
+ln -s /usr/local/python3/bin/python3 /usr/bin/python3
+
+ll /usr/bin/python*	查看该目录下只有python2的连接，需要建立一个python3的连接
+python3被放到了 /usr/bin/目录，可以全局使用python3命令进入命令行环境
+
+放到下面目录的软件具可以全局使用：
+/bin目录: 放置一些系统的必备执行档
+/usr/bin目录:放置一些应用软件工具的必备执行档
+/sbin目录: 放置一些系统管理的必备程序
+/usr/sbin目录: 放置一些网路管理的必备程序

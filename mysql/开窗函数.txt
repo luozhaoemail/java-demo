@@ -1,0 +1,40 @@
+1、over函数的写法：
+over（partition by class order by sroce） 按照sroce排序进行累计，order by是个默认的开窗函数，按照class分区。
+
+2、开窗的窗口范围：
+over（order by sroce range between 5 preceding and 5 following）：窗口范围为当前行数据幅度减5加5后的范围内的。
+over（order by sroce rows between 5 preceding and 5 following）：窗口范围为当前行前后各移动5行。
+
+3、与over()函数结合的函数的介绍
+查询每个班的第一名的成绩：
+select * from (select t.name,t.class,t.sroce,rank() over(partition by t.class order by t.sroce desc) mm from stu t) where mm = 1;
+在求第一名成绩的时候，不能用row_number()，因为如果同班有两个并列第一，row_number()只返回一个结果。
+select * from (select t.name,t.class,t.sroce,row_number() over(partition by t.class order by t.sroce desc) mm from stu t) where mm = 1;
+求班级成绩排名：
+select t.name,t.class,t.sroce,rank() over(partition by t.class order by t.sroce desc) mm from stu t;
+
+4、sum()over（）的使用:
+根据班级进行分数求和:
+select t.name,t.class,t.sroce,sum(t.sroce) over(partition by t.class order by t.sroce desc) mm from stu t;
+
+5、first_value() over()和last_value() over()的使用 :
+分别求出第一个和最后一个成绩。
+select t.name,t.class,t.sroce,first_value(t.sroce) over(partition by t.class order by t.sroce desc) mm from stu t;
+select t.name,t.class,t.sroce,last_value(t.sroce) over(partition by t.class order by t.sroce desc) mm from stu t;
+
+6、类似用法
+　count() over(partition by ... order by ...)：求分组后的总数。
+　　max() over(partition by ... order by ...)：求分组后的最大值。
+　　min() over(partition by ... order by ...)：求分组后的最小值。
+　　avg() over(partition by ... order by ...)：求分组后的平均值。
+　　lag() over(partition by ... order by ...)：取出前n行数据。　　
+
+　　lead() over(partition by ... order by ...)：取出后n行数据。
+
+　　ratio_to_report() over(partition by ... order by ...)：Ratio_to_report() 括号中就是分子，over() 括号中就是分母。
+
+　　percent_rank() over(partition by ... order by ...)：
+
+7、over partition by与group by的区别：
+group by是对检索结果的保留行进行单纯分组，一般和聚合函数一起使用例如max、min、sum、avg、count等一块用。
+partition by虽然也具有分组功能，但同时也具有其他的高级功能。

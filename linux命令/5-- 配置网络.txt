@@ -1,0 +1,122 @@
+虚拟机选择桥接网卡 
+
+dhclient eth0 获取IP地址
+配置文件：vi  /etc/network/interfaces
+auto eth0
+iface eth0 inet static
+address 10.0.0.100
+netmask 255.255.255.0
+gateway 10.0.0.1
+
+vi  /etc/resolv.conf文件配置：
+nameserver 192.168.2.1 # 一般和gateway的地址是一致的
+或者
+ /etc/resolvconf/resolv.conf.d/base
+
+然后
+sudo ifup eth0
+sudo ifdown eth0
+/etc/init.d/networking restart
+或 service networking restart
+
+
+auto lo
+iface lo inet loopback
+
+auto ens18
+iface ens18 inet dhcp
+
+
+Ubuntu关于修改resolv.conf重启失效的问题
+resolv.conf文件其实是一个Link文件
+2中解决办法
+1.在网卡的配置文件中定义DNS地址：
+iface eth0 inet static
+address 192.168.0.10
+netmask 255.255.255.0
+gateway 192.168.0.1
+dns-nameserver 8.8.8.8
+
+2.修改resolvconf服务的配置文件：
+vim /etc/resolvconf/resolv.conf.d/base
+在其中添加或修改：nameserver 8.8.8.8
+然后在resolvconf -u
+
+auto eth0
+iface eth0 inet dhcp
+
+$ sudo dhclient -r               //release ip 释放IP
+$ sudo dhclient   eth0               //获取IP
+
+
+
+******************************************
+******************************************
+###CentOs下配置网卡##
+ service network restart   #重启网络
+ 
+cd /etc/sysconfig/network-scripts/
+
+cat  /etc/sysconfig/network-scripts/ifcfg-eth0   **-网卡名称
+cat  /etc/sysconfig/network-scripts/ifcfg-enp0s3
+ 
+ /etc/profile
+ /etc/hosts
+ /etc/hostname
+ 
+ 网卡配置信息：
+cat ifcfg-enp0s3
+---------------------- 
+TYPE=Ethernet
+BOOTPROTO=none
+DEFROUTE=yes
+PEERDNS=yes
+PEERROUTES=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_PEERDNS=yes
+IPV6_PEERROUTES=yes
+IPV6_FAILURE_FATAL=no
+NAME=enp0s3
+UUID=90c21327-b1e1-4731-93cb-2a17fbc32986
+DEVICE=enp0s3
+ONBOOT=yes
+IPADDR=192.168.1.120
+GATEWAY=192.168.1.1
+PREFIX=24
+DNS1=61.128.128.68
+DNS2=61.128.192.68
+-------------------------
+
+
+/etc/sysconfig/network-scripts
+[root@localhost network-scripts]# cat ifcfg-eth0
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=eth0
+UUID=2bb2ea73-e114-4fdd-b723-2277e6addfd2
+DEVICE=eth0
+ONBOOT=yes
+IPADDR=10.10.10.111
+NETMASK=255.255.255.0
+GATEWAY=10.10.10.1
+DNS1=202.202.32.33
+DNS2=61.128.128.68
+----------------------------
+
+
+
+
+
+

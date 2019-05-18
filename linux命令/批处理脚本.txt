@@ -1,0 +1,24 @@
+#目的是为了把集群所有节点的临时文件删了
+for i in $(seq 1 9);  #循环bd01-bd09
+  do echo bd0$i;
+  ssh bd0$i "cd /home/spark/spark;  rm -rf blockmgr-* spark-* ";
+ done
+
+for i in $(seq 0 6);#循环bd10-bd16
+  do echo bd1$i;
+  ssh bd1$i "cd /home/spark/spark;  rm -rf blockmgr-* spark-* ";
+ done
+
+
+
+#用集群批处理命令来显示时间，集群之间时间差不超过3秒
+for i in $(seq 1 4);  
+do echo a$i;  
+     ssh a$i "date";  
+done
+
+#循环传文件
+for i in $(seq 1 4);  
+   do echo a$i; 
+   scp storm.yaml root@a$i:/opt/storm/conf; 
+done

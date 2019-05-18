@@ -1,0 +1,69 @@
+数据库索引好比是一本书前面的目录，能加快数据库的查询速度。
+
+mysql中
+dorp index indexname on `tablename`
+
+1. 单列索引: 一个索引只包含一个列,一个表可以有多个单列索引.
+
+a 普通索引
+create index myindex on  tb(sno);
+alter table tb add index myindex(sno);
+
+(`字段名`(length)) 就是(sno)
+如果是char,varchar,类型,length可以小于字段的实际长度,
+如果是blob和text类型就必须指定长度
+
+b  唯一索引
+要求所有的类的值是唯一的,这一点和主键索引一样.但是他允许有空值,
+create unique index indexname on `tablename`(`字段名`(length));
+alter table tablename add unique (字段名)  
+
+c  主键索引
+不允许有空值，主键索引建立的规则是 int优于varchar,
+一般在建表的时候创建,就是指定主键默认是主键索引
+最好是与表的其他字段不相关的列或者是业务不相关的列.
+一般会设为 int 而且是 AUTO_INCREMENT自增类型的
+primary key (`id`)
+
+2. 组合索引: 一个组合索引包含两个或两个以上的列.
+create index indexname on `tablename`(`字段名`(length),`字段名`(length),...);
+
+create index myindex on `award`(`nickname`, `account`, `created_time`);
+他实际包含的是3个索引 
+(nickname) 
+(nickname, account)
+(nickname, account created_time)
+这是最左前缀排序，where时的条件要与索引字段顺序一致
+索引有效的情况：
+select * from award where nickname='a'
+select * from award where nickname='a' and account='b'
+select * from award where nickname='a' 						   and created_time=c
+select * from award where nickname='a' and account='b' and created_time=c
+
+索引无效的情况：
+select * from award where 	account='b'  不能跳过某个字段来进行查询
+select * from award where 	account='b' and created_time=c
+select * from award where nickname>'a' and account='b' and created_time=c 某个列有范围查询
+
+
+3. 全文索引---模糊查询
+where column lick '%xxxx%时索引会失效，要用全文索引
+alter table tablename add fulltext(column1, column2)
+
+把column1和column2字段里有xxx、sss和ddd的数据记录全部查询出来。
+select * from tablename where match(column1, column2) against(‘xxx′, ‘sss′, ‘ddd′)
+
+Mysql的引擎是InnoDB，基于B+树
+create table `award` (
+   `id` int(11) not null auto_increment comment '用户id',
+   `aty_id` varchar(100) not null default '' comment '活动场景id',
+   `nickname` varchar(12) not null default '' comment '用户昵称',
+   `is_awarded` tinyint(1) not null default 0 comment '用户是否领奖',
+   `award_time` int(11) not null default 0 comment '领奖时间',
+   `account` varchar(12) not null default '' comment '帐号',
+   `password` char(32) not null default '' comment '密码',
+   `message` varchar(255) not null default '' comment '获奖信息',
+   `created_time` int(11) not null default 0 comment '创建时间',
+   `updated_time` int(11) not null default 0 comment '更新时间',
+   primary key (`id`)
+ ) engine=innodb auto_increment=1 default charset=utf8 comment='获奖信息表';
