@@ -85,17 +85,17 @@ class ProxyFactory
     public Object getProxyInstance()
     {
     	return Proxy.newProxyInstance(
-    						target.getClass().getClassLoader(),
-    						target.getClass().getInterfaces(),
-    						new InvocationHandler() {
-								@Override
-								public Object invoke(Object proxy,Method method, Object[] args)throws Throwable {
-									System.out.println("开始事务2");			                      
-			                        Object returnValue = method.invoke(target, args);
-			                        System.out.println("提交事务2");
-			                        return returnValue;
-								}    							
-    						});///
+    			target.getClass().getClassLoader(),
+    			target.getClass().getInterfaces(),
+    			new InvocationHandler() {
+				@Override
+				public Object invoke(Object proxy,Method method, Object[] args)throws Throwable {
+					 System.out.println("开始事务2");			                      
+			                 Object returnValue = method.invoke(target, args);
+			                 System.out.println("提交事务2");
+			                 return returnValue;
+				}    							
+    			});///
     	/*newProxyInstance三个参数说明：
     	ClassLoader loader,:指定当前目标对象使用类加载器,获取加载器的方法是固定的
 		Class<?>[] interfaces,:目标对象实现的接口的类型,使用泛型方式确认类型
