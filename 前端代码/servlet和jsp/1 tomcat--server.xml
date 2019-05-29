@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Server port="8005" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener"/>
+  <Listener SSLEngine="on" className="org.apache.catalina.core.AprLifecycleListener"/>
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener"/>
+
+  <GlobalNamingResources>
+    <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
+  </GlobalNamingResources>
+
+  <!-- 可以有多个Service -->  
+  <Service name="Catalina"> 
+  
+	 <!-- http协议， redirectPort="8443"表示8080失败后可以使用该端口 --> 
+    <Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+      
+	 <!-- https协议 -->  
+    <Connector SSLEnabled="true" clientAuth="false" keystoreFile="C:\install\codingWeb\apache-tomcat-8.0.20\tomcat.keystore" keystorePass="123456" maxThreads="150" port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol" scheme="https" secure="true" sslProtocol="TLS"/>
+    
+    <!-- tomcat集群 -->
+    <Connector port="8009" protocol="AJP/1.3" redirectPort="8443"/>
+
+	<!-- 每个Service下只能有1个Engine -->  
+	<Engine defaultHost="localhost" name="Catalina">     
+	  <Realm className="org.apache.catalina.realm.LockOutRealm">
+		<Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+	  </Realm>
+		
+	  <!-- 定义了项目部署的根目录为webapps -->
+	  <Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true">
+			<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
+			
+			<Context docBase="basicWebDemo" path="/basicWebDemo" reloadable="true" source="org.eclipse.jst.jee.server:basicWebDemo"/>
+			 <!-- 热部署自定义路径，和修改后自动重启：<Context path ="/Pet" reloadable ="true" docBase ="F:/PetWeb/WebContent" /> 
+			 -->
+	  </Host>
+	</Engine>	
+  </Service>  
+  
+</Server>
+

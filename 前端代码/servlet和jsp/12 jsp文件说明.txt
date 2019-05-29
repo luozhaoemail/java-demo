@@ -1,0 +1,111 @@
+jsp本质上还是 Servlet，JspServlet 将请求的 JSP 文件转义成为对应的 java 文件
+		在一个项目的目录下D:\apache-tomcat-8.0.20\work\Catalina\localhost\ROOT\org\apache\jsp\
+		一个index.jsp对应着一个index_jsp.java
+
+public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase{   //HttpJspBases 继承了HttpServlet
+
+	///_jspService就是 servlet的 Service（）
+	public void _jspService(final javax.servlet.http.HttpServletRequest request, final javax.servlet.http.HttpServletResponse response){
+	
+		//九大jsp内置对象：PageContext  Request  Response  Session  Application   Out  Page  Exception  Config
+		/////////这是为什么下面这些声明的对象可以在jsp里面可以直接使用的原因
+		/////////内置对象在jsp页面可以直接使用，但是不能在全局代码块里面使用，因为它们只属于一个页面，都在_jspService方法体内。
+		final javax.servlet.jsp.PageContext pageContext;  
+		final javax.servlet.ServletContext application;
+		final javax.servlet.ServletConfig config;
+		try {
+			out.write("\r\n");
+			out.write("<!DOCTYPE html>\r\n");
+			out.write("<html lang=\"en\">\r\n");
+			......
+		} catch (java.lang.Throwable t) {
+		}
+	  
+	}	
+}
+
+语法和指令：
+注释：
+jsp <%-- --%>	 不会转义， jsp.java中不显示
+html <!-- - -->  会被jsp.java转义和发送，但是浏览器不会执行。 jsp会把html代码转换成java ，jsp.java显示： out.write("\t<body>\r\n");
+
+<% int a=0; //java局部代码块 %>  会被jsp.java转义，jsp.java中显示： int a=0; //java局部代码块 
+<%! int a=0; //java全局部代码块 %>
+
+<% out.write("dddddddddddddddd"); %>  直接调后台的jsp.java代码
+<%="dddddddddddddddd" %>   这是简写形式！！！，后台jsp.java是 out.print("dddddddddddddddd");
+
+<%@include file="include/_header.jsp" %>  静态引入，拼接成一个jsp。只转义合并后的jsp   不允许同名变量
+<jsp:include page="include/_footer.jsp" %></jsp:include >  动态引入，引入的jsp单独转义  允许同名变量
+
+<jsp:forward page="main.jsp" %></jsp:forward >  转发标签， 后台是PageContext.forward("main.jsp");
+<jsp:forward page="main.jsp" %>
+	<jsp:param name="name" value="zhang3" />  带参数，后台是PageContext.forward("main.jsp?name=zhang3");
+</jsp:forward >
+
+
+--------start---------------------
+page 指令  <%@page 属性名=值%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*,com.pojo.*" %>  不同的包用逗号隔开，
+<%@ page session = "false" %>  关闭session，默认是开启的
+<%@ page errorPage = "1.jsp" %> 错误时要跳转指定的jsp
+
+--------start---------------------
+taglib 指令
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+****************end*************************
+ 
+ 
+--------start---------------------
+html中嵌套<%= java代码 %>
+<b>用户名：<%=request.getParameter("name")%></b><br />
+<b>用户名：${param.uname}</b><br />
+
+<b><%=((User)request.getAttribute("user")).getAddr().getTown() %></b><br />
+<b> ${user.addr.town }</b><br />
+****************end*************************
+
+
+--------start---------------------
+嵌套js
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<base href="<%=basePath%>">  表示先声明根目录，后面自己用相对目录${base_path}
+或者：
+${pageContext.request.contextPath}表示根目录
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.9.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/ajaxUtil.js"></script>
+<script type="text/javascript">
+function getjQueryAjax(){
+$.post(
+		"${pageContext.request.contextPath}/user.do", //待载入页面的URL地址
+		{ uname: parm, time: "123456" }, //传送2个参数,待发送 Key/value 参数
+		function(result){    //载入成功时回调函数。
+			alert("5 post: " + result[1].uname);
+	 	},
+	 	"json" //返回内容格式，xml, html, script, json, text, _default
+	 );
+}
+</script >
+****************end*************************
+
+
+----------start-------------------
+嵌套css:
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.css" />
+<style type="text/css">
+	#showdiv{
+		border:solid 1px;
+		width:200px;
+		height:100px; 
+	}
+</style>
+**************end***************************
+
+

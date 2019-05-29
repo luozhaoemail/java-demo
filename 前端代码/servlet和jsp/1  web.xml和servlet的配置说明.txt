@@ -1,0 +1,111 @@
+Web 项目下的 web.xml 文件为局部配置，针对本项目的位置。
+Tomcat 下的 web.xml 文件为全局配置，配置公共信息。
+
+第一个版本：
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xmlns="http://java.sun.com/xml/ns/javaee" 
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+		 id="WebApp_ID" 
+		 version="2.5">
+		
+ 	<!--配置Servlet  -->
+ 		<!--配置servlet类路径  -->
+ 		<servlet>
+ 			<servlet-name>my</servlet-name>     servlet-name必须一致
+ 			<servlet-class>com.bjsxt.servlet.MyServlet</servlet-class>
+ 		</servlet>
+ 		<!--配置访问方式  -->
+ 		<servlet-mapping>
+ 			<servlet-name>my</servlet-name>
+ 			<url-pattern>/my</url-pattern>   这就是servlet的映射如http://localhost:8080/project/my?uname=张三，web3.0中采用注解！！！
+ 		</servlet-mapping>
+		
+ 	<!--配置第二个servlet  -->
+ 		<servlet>
+ 			<servlet-name>my2</servlet-name>
+ 			<servlet-class>com.bjsxt.servlet.MyServlet2</servlet-class>
+ 		</servlet>
+ 		<servlet-mapping>
+ 			<servlet-name>my2</servlet-name>
+ 			<url-pattern>/my2</url-pattern>
+ 		</servlet-mapping>
+		
+	<!--配置第3个servlet,也可以在eclipse创建时自动生成它  -->
+	 <servlet>
+		<description>文字描述</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>my3</servlet-name>
+		<servlet-class>com.bjsxt.servlet.MyServlet3</servlet-class>
+		<load-on-startup>1</load-on-startup> 自启动，生命周期为从服务器启动到服务器关闭	
+			
+		<init-param>  在servlet里面配置init-param，表示局部的参数，当前servlet有效，获取：this.getServletConfig().getInitParameter("config");
+			<param-name>config</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>	
+	</servlet>	
+	<servlet-mapping>
+ 		<servlet-name>my3</servlet-name>
+ 		<url-pattern>/my3</url-pattern>
+ 	</servlet-mapping>
+	
+	
+	<!--后面继续添加： 这里配置全局数据，可以在代码中获取ServletContext.getInitParameter("name");  -->
+	<context-param>
+		<param-name>name</param-name>
+		<param-value>zhangsan</param-value>
+	</context-param>
+	
+	<!--配置项目名称  -->
+	<display-name>yourProjectNme</display-name>
+	
+	<!-- 根/ 默认访问的路径，如没有报错404  -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+</web-app>
+
+这个配置的映射的类为：
+package com.bjsxt.servlet;
+
+@WebServlet("/my") 加了这一句注解，就不需要在web.xml中配置servlet类路径了。不加就按照上面的配置
+public class MyServlet extends HttpServlet{
+	//必须有service方法，真正处理请求的方法
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		resp.getWriter().write("this is my first servlet.");
+		System.out.println("this is my first servlet.");
+	}
+	
+	//不是必须的，可选。 初始化方法，在servlet第一次加载内容的时候被调用
+	@Override
+	public void init() throws ServletException {
+		System.out.println("servlet初始化完成");
+	}
+	//不是必须的，可选。是在servlet被销毁时执行，也就服务器关闭时。
+	@Override
+	public void destroy() {
+		System.out.println("我被销毁了...");
+	}
+}
+
+使用：
+1、 创建普通的 java 类并继承 HttpServlet
+2、 覆写 protected void service(HttpServletRequest req, HttpServletResponse resp) 方法
+3、 在 service 方法中书写逻辑代码即可
+4、 配置 webRoot 下的 WEB-INF 文件夹下的 web.xml文件中配置 servlet
+
+运行流程:
+url：http://localhost:8080/project/my
+
+调用流程：
+浏览器发送请求到服务器，服务器根据请求 URL 地址中的 URI 信息在 webapps 目录下找到对应的项目文件夹，
+然后在 web.xml 中检索对应的 servlet，找到后调用并执行Servlet。
