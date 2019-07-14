@@ -2,7 +2,7 @@
 常用的java代码示例
 
 ========================
-# Git 为你的每一个提交都记录你的名字与电子邮箱地址，所以第一步是告诉 Git 这些都是啥。
+Git 为你的每一个提交都记录你的名字与电子邮箱地址，所以第一步是告诉 Git 这些都是啥。
 git config --global user.name 'Your Name'
 git config --global user.email you@somedomain.com
 
@@ -64,7 +64,7 @@ git reset –hard HEAD~100(把当前的版本回退到上100个版本)
 git br -d <branch> # 删除某个分支
 git br -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)
 
-#撤销上一次push操作，唯一的办法就是本地修正然后又强制推送，即：
+撤销上一次push操作，唯一的办法就是本地修正然后又强制推送，即：
 git reset --hard 然后 git push -f。
 ==========================
 
