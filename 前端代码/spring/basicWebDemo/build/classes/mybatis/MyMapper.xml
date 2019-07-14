@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.MyMapper" >
+    <cache readOnly="true"></cache><!-- 二级缓存，多个session共享数据 -->
+    
+    <!-- resultMap自定义映射关系 -->
+   <resultMap id="userMap" type="User">
+  		<!-- 主键使用 id 标签配置映射关系 -->
+        <id property="id" column="id" javaType="java.lang.Integer"></id>
+        <!-- 其他列使用 result 标签配置映射关系 -->
+        <result property="username" column="username" javaType="java.lang.String"></result>
+        <result property="password" column="password" javaType="java.lang.String"></result>
+        <result property="photo" column="photo" javaType="java.lang.String"></result>
+    </resultMap>    
+    
+    <select id="mySelect" resultMap="userMap">  <!-- 返回类型是 resultMap-->
+		select * from users
+	</select>
+    	
+    <select id="selAll" resultType="mybatis.User">  <!-- 反射路径，pojo类和mysql表的字段要一样 -->
+		select * from users
+	</select>
+	
+	<!-- 当多参数时,不需要写parameterType -->
+	<select id="selByName"  resultType="User">
+		select id,username,password,photo from users where id=#{0} and username=#{1}
+	</select>	
+	
+	<select id="selByName2"  resultType="User">
+		select id,username,password,photo from users where id=#{id} and username=#{name}
+	</select>	
+	
+</mapper>

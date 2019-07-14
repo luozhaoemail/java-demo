@@ -1,0 +1,223 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*云计算概况信息*/
+.topdiv_left{
+	 margin-top: 10px;
+	 background:#FFFFFF;
+	 height:300px;
+	 border: 1px solid #CCCCCC;
+}
+
+.topdiv_right{
+	 margin-top: 10px;
+	 background:#FFFFFF;
+	 height:300px;
+	 border: 1px solid #CCCCCC;
+}
+
+
+.divright_title{
+	width: 150px;
+	float: left;
+	margin-left: 20%;
+	margin-top:50px;
+	padding: 10px 10px 0px 10px;
+	border-top:1px solid #CCCCCC;
+	border-left:1px solid #CCCCCC;
+	border-bottom:1px solid #CCCCCC;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+.divright_content{
+	width:300px;
+	height:250px;
+	margin-top:30px;
+	padding:26px 10px 0px 10px;
+	float: left;
+	border:1px solid #118ee8;
+	border-radius: 5px;	
+}
+
+
+
+/*云计算*/
+.container{
+	width:100%;
+	background: #f8f8f8;	
+}
+.pve-pageinfo {
+	display: flex;
+	padding: 0px 1.2rem;
+	padding-bottom: 20px;
+}
+
+.pageshow-left {
+	width: 100%;
+	color: #a9a9a9;
+	letter-spacing: 1px;
+}
+
+.pageshow-right {
+	width: 100%;
+	color: #333333;
+	text-align: right;
+}
+
+.pageshow-right .pagination {
+	margin: 0 !important;
+}
+
+.pageshow-right .pagination>li>a {
+	padding: 0px 8px;
+	margin-left: 8px;
+	color: #333333;
+}
+
+.pageshow-right .pagination .active a {
+	color: white !important;
+}
+
+.pageshow-right .pagination li {
+	margin: 0px 3px !important;
+}
+
+.pageshow-right .pagination>li:first-child>a,
+.pageshow-right .pagination>li:last-child>a {
+	border-radius: 0px !important;
+}
+
+.page-href input {
+	width: 30px;
+	height: 20px;
+	text-align: center;
+	margin: 0px 5px;
+}
+
+.page-hrefbtn {
+	display: inline-block;
+	height: 20px;
+	padding: 0px 5px;
+	margin: 0px 5px;
+	border: 1px solid #ececec;
+	color: #333333;
+}
+
+#myTabContent {
+	height: 120px;
+}
+
+#myTabContent p{
+	color:#999999;
+	line-height: 1.6;
+}
+
+/**/
+	.yunjistitle {
+		height:55px;
+		width: 100%;
+		line-height: 55px;
+	}
+	.yunjistitle strong{
+		font-size: 16px;
+	}
+	
+	.conttitle {
+		padding-bottom: 10px;
+		width: 100%;
+		background: white;
+	}
+	
+	.continput {
+		height: 75px;
+		width: 100%;
+		line-height: 75px;
+	}
+	
+	.inputborder {
+		border: solid 1px #999999;
+		background: none;
+		margin-right: 10px;
+	}
+	
+	.jingcheng {
+		margin-right: 20px;
+		color: #999999;
+	}
+	
+		
+	table tr th {
+		text-align: center;
+	}
+
+	/**/
+	.row {
+	    margin-right: -15px;
+	    margin-left: 0px !important;
+	}
+	.btn {		   
+	    padding: 3px 10px;
+    }
+    .table-responsive{
+    	background: #FFFFFF;
+        padding: 10px;
+    }
+   /*协议*/
+	.infoxieyi {
+		background: #FFFFFF;
+		height: 50px;
+		width: 100%;
+		margin-top: 10px;
+	}
+	
+	.infoxieyicenter {
+		height: 50px;
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
+	
+	.infoxieyicti {
+		height: 20px;
+		width: 5px;
+		background: #1890ff;
+	}
+	/***/
+	.active-tabletack {
+	    color: white;
+	    background-color: #1890ff;
+	    border: 1px solid #1890ff;
+    }
+
+	.pve-tabletack {
+		padding: 2px 5px;
+		border: 1px solid #ececec;
+		border-radius: 3px;
+		font-size: 1rem;
+		color: #999999;
+		margin: 0px 5px;
+	}
+	
+	.active-tabletack {
+		color: white;
+		background-color: #1890ff;
+		border: 1px solid #1890ff;
+	}
+/*分页按钮*/
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #3fa1fa;
+    border-color: #3fa1fa;
+}
+/*选择*/
+.btn-primary {
+    color: #fff;
+    background-color: #3fa1fa;
+    border-color: #3fa1fa;
+}
+tbody td{
+	color: #999999;
+}

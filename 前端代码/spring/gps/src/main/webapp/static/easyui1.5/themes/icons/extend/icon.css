@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.icon-extend-home{
+	background:url('home.png') no-repeat center center;
+}
+.icon-extend-sys{
+	background:url('sysmnr.png') no-repeat center center;
+}
+.icon-extend-1{
+	background:url('1.png') no-repeat center center;
+}
+.icon-extend-2{
+	background:url('2.png') no-repeat center center;
+}
+.icon-extend-3{
+	background:url('3.png') no-repeat center center;
+}
+.icon-extend-4{
+	background:url('4.png') no-repeat center center;
+}

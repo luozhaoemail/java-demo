@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 使用Spring 框架配置 myBatis，就不需要配置mybatis.xml了。 -->    
+    <!-- 数据源封装类 .数据源:获取数据库连接,spring-jdbc.jar中-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+    	<property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+    	<property name="username" value="root"></property>
+    	<property name="password" value="root"></property>
+    </bean>
+    
+    <!-- myBatis创建SqlSessionFactory对象 -->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<!-- 数据库连接信息来源于dataSource -->
+    	<property name="dataSource" ref="dataSource"></property>
+    </bean>
+	
+	<!-- 扫描器相当于mybatis.xml中 mappers下package标签,扫描com.bjsxt.mapper包后会给对应接口创建对象-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<!-- 要扫描哪个包 -->
+    	<property name="basePackage" value="spring.mapper"></property>
+    	<!-- 和factory产生关系 -->
+    	<property name="sqlSessionFactory" ref="factory"></property>
+    </bean>
+    
+    <!-- 由spring管理service实现类 -->
+    <bean id="userService" class="spring.service.impl.UserServiceImpl">
+    	<property name="userMapper" ref="userMapper"></property>
+    </bean>
+    
+	
+</beans>

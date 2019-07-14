@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 实体类名+Mapper.xml ,就是实现类. 编写需要执行的 SQL 命令
+	 不需要编写实现类,只需要写需要执行的 sql 
+	 namesapce:理解成实现类的全路径(包名+类名)，保证命名空间唯一，随便写-->
+<mapper namespace="userDao" >
+	<!-- id:方法名 
+		parameterType:定义参数类型
+		resultType:返回值类型.
+		
+		如果方法返回值是list,在resultType中写List的泛型,因为mybatis
+		对jdbc封装,一行一行读取数据
+	-->
+	<select id="selAll" resultType="mybatis.User">  <!-- 反射路径，pojo类和mysql表的字段要一样 -->
+		select * from users
+	</select>
+	
+	<!-- 参数 #{0}或 #{param1} -->
+	<select id="selWhere" parameterType="String" resultType="mybatis.User">
+		select id,username,password,photo from users where username=#{username}
+	</select>	
+	
+	<select id="selectByID" parameterType="int" resultType="mybatis.User">		
+		select id,username,password,photo from users where id=#{id}
+	</select>
+		
+	<select id="select_id_name" parameterType="map" resultType="mybatis.User">		
+		<!--
+		select id,username,password,photo from users where id=#{id} and username=#{username}
+		# 占位符：select id,username,password,photo from users where id=? and username=? 
+		$ 字符串拼接： select id,username,password,photo from users where id=7 and username='admin' 
+		select id,username,password,photo from users where id=${id} and username='${username}'
+		-->		
+		select id,username,password,photo from users where id=#{id} and username=#{username}
+	</select>
+	
+	<select id="selCount" resultType="int">
+		select count(*) from users
+	</select>	
+	
+	
+	<insert id="insert" parameterType="mybatis.User">
+        insert into users(username,password,photo) values (#{username},#{password},#{photo})
+    </insert>
+    
+    <update id="update" parameterType="mybatis.User" >
+    	update users set password=#{password}, photo=#{photo} where username=#{username}
+    </update>
+    
+	<delete id="delete" parameterType="int" >
+        delete from users where id=#{id}
+    </delete>
+    
+    
+    <!-- 分页 -->
+    <select id="page" parameterType="map" resultType="mybatis.User" >
+		select * from users limit #{pageStart},#{pageSize}
+	</select>
+	
+	
+</mapper>

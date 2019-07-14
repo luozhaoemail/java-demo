@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+    default-autowire="byName"    >
+    
+    <!--手动关联 teacher1 和 people1   -->
+    <!-- <bean id="teacher1" class="pojo.Teacher"></bean>
+    <bean id="people1" class="pojo.People" >
+    	<property name="teacher2" ref="teacher1"></property>
+    </bean> -->
+    
+    <!--自动注入 teacher 和 people   -->
+    <!-- byName时 teacher 要和People类的成员变量名teacher相等
+    <bean id="teacher" class="pojo.Teacher"></bean> 
+   	<bean id="people" class="pojo.People" autowire="byName"></bean>  -->    
+    
+    <!-- byName时 teacher123 要和People类的成员变量名teacher的类型相等
+    <bean id="teacher123" class="pojo.Teacher"></bean> 
+    <bean id="people" class="pojo.People" autowire="byType"></bean>   -->    
+    
+    <!-- constructor时  People类要创建构造函数
+  	<bean id="teacher7" class="pojo.Teacher"></bean>
+    <bean id="people" class="pojo.People" autowire="constructor"></bean>  -->
+    
+    <!--这里不写autowire，但是在 beans里面写全局的default-autowire -->
+    <bean id="teacher" class="pojo.Teacher"></bean>
+    <bean id="people" class="pojo.People"></bean>
+		
+	
+	 <!-- 加载属性文件 -->
+    <context:property-placeholder location="classpath:spring/demo.properties"/>
+     <!-- 注解扫描 -->
+    <context:component-scan base-package="spring.test"></context:component-scan>
+	<!--  <bean id="demo2" class="spring.test.Demo">
+    	<property name="host" value="${host}"></property>
+    	<property name="port" value="${port}"></property>    	
+    </bean> -->
+    <!-- <bean id="demo1" class="spring.test.Demo"></bean> --> <!--默认scope="singleton"  -->
+    <bean id="demo1" class="spring.test.Demo" scope="prototype"></bean>
+	
+</beans>

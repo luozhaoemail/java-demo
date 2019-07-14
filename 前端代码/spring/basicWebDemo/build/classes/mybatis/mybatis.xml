@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<!-- 全局配置文件(编写 JDBC 四个变量),没有名称和地址要求 -->  
+<configuration>
+	<!-- 绑定 log4j日志-->
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>
+	</settings>
+	
+	<!-- 别名 -->
+    <typeAliases>
+    	<typeAlias type="mybatis.User" alias="user" />  <!--给某个类起别名  -->
+    	<package  name="mybatis" />  <!--给某个包起别名，该包下的类就可以直接引用，不加前缀  -->
+    </typeAliases>
+    
+
+	<!-- default引用environment的id,当前所使用的环境 -->
+	<environments default="default">
+		<!-- 声明可以使用的环境 -->
+		<environment id="default">
+				
+			<!-- JDBC使用原生JDBC事务，MANAGED把事务管理转交给其他容器-->
+			<transactionManager type="JDBC"></transactionManager>
+			
+			 <!--  POOLED使用数据库连接池, 还有UNPOOLED, JNDI-->
+			<dataSource type="POOLED"> 
+				<property name="driver" value="com.mysql.jdbc.Driver"/>
+				<property name="url" value="jdbc:mysql://localhost:3306/test"/>
+				<property name="username" value="root"/>
+				<property name="password" value="root"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="mybatis/userMapper.xml"/> <!-- xml文件的路径 -->
+		<mapper resource="mybatis/userMapper2.xml"/>
+		<package name="mybatis"/> <!-- 使用Mapper时，指定接口MyMapper.java和MyMapper.xml所在的包名，将二者映射。 -->
+	</mappers>
+</configuration>

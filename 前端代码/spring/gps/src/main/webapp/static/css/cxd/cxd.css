@@ -1,0 +1,123 @@
+@CHARSET "UTF-8";
+.time-title {
+	font-size: 14px;
+}
+
+.title {
+	padding-left: 20px;
+	display: flex;
+	height: 60px;
+	width: 100%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.pic {
+	margin-top: 10px;
+	padding-left: 20px;
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.container {
+	margin-top: 60px;
+	display: flex;
+	flex-direction: row;
+	left: 50%;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+}
+
+ul.pagination {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	margin-top: 10px;
+}
+
+ul.pagination li {
+	display: inline;
+}
+
+ul.pagination li a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+	border: 1px solid #ddd;
+}
+
+ul.pagination li a.active {
+	background-color: #4CAF50;
+	color: white;
+	border: 1px solid #4CAF50;
+}
+
+ul
+.pagination
+ 
+li
+ 
+a
+:hover
+:not
+ 
+(
+.active
+ 
+)
+{
+background-color
+:
+ 
+#ddd
+;
+
+
+}
+div.center {
+	text-align: center;
+}
+
+#radar {
+	width: 450px;
+	height: 400px;
+}
+
+#circle {
+	width: 720px;
+	height: 400px;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+	text-align: center;
+}
+
+table td, table th {
+	border: 1px solid #cad9ea;
+	color: #666;
+	height: 50px;
+	width: 100px;
+	white-space: nowrap;
+}
+
+table thead th {
+	background-color: #CCE8EB;
+	width: 100px;
+}
+
+table tr:nth-child(odd) {
+	background: #fff;
+}
+
+table tr:nth-child(even) {
+	background: #F5FAFA;
+}

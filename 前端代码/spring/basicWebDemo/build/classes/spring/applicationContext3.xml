@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
+    xmlns:aop="http://www.springframework.org/schema/aop"     
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd        
+        http://www.springframework.org/schema/aop						 
+        http://www.springframework.org/schema/aop/spring-aop.xsd">	<!--新增aop  -->
+    <!-- 面向切面编程 Aspect Oriented Programmin (AOP)的配置 -->    
+    
+    <!-- 配置通知类对象,在切面中引入 -->
+    <bean id="mybefore" class="spring.test.MyBeforeAdvice"></bean>
+    <bean id="myafter" class="spring.test.MyAfterAdvice"></bean>
+    
+    <!-- 异常处理类 -->
+   	<bean id="mythrow" class="spring.test.MyThrowAdvice"></bean>
+    
+    <!-- 配置 Demo 类,测试使用 -->
+	<bean id="demo" class="spring.test.SpringAOP"></bean>
+    
+    
+    <!-- 配置切面 -->
+   	<aop:config>
+   		<!-- 配置切点：   *表示任意类或者包， ..表示任意参数 -->
+   		<aop:pointcut expression="execution(* spring.test.SpringAOP.demo1(..))" id="mypoint1"/>
+    	<aop:pointcut expression="execution(* spring.test.SpringAOP.*(..))" id="mypoint2"/> 
+    	
+    	<!-- 配置前置、后置方法 -->
+    	<aop:advisor advice-ref="mybefore" pointcut-ref="mypoint3"/>
+   		<aop:advisor advice-ref="myafter" pointcut-ref="mypoint3"/>
+   		
+   		<!-- 异常通知 -->   		
+   		<aop:aspect ref="mythrow">
+			<aop:pointcut expression="execution(* spring.test.SpringAOP.demo1())" id="mypoint3" />
+			<aop:after-throwing method="myexception" pointcut-ref="mypoint3" throwing="e1"/>
+		</aop:aspect>
+   	</aop:config>
+   	   	
+	
+</beans>

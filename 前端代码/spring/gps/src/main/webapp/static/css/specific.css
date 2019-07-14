@@ -1,0 +1,29 @@
+.box-header{
+	background-color:#fafafa;
+	background-image: none;
+}
+.box-content{
+	background-color:#fafafa;
+}
+.box-bottom{
+	border-bottom: 1px solid #DEDEDE;
+}
+.st-title{
+	text-align: center;
+	font-size: 14px;
+	 font-family: inherit;
+}
+.col-lg-4{
+	padding-left:10px;
+}
+.form-control{
+	padding:6px 59px;
+	margin-left:10px;
+	margin-top:5px;
+}
+.m-title{
+	background-color: #bebebe;
+}
+.ht-bg{
+	background: #fff;
+}

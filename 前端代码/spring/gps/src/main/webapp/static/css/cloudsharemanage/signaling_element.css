@@ -1,0 +1,263 @@
+@charset "utf-8";
+/* CSS Document */
+/*信令元*/
+.container{
+	width:100%;
+}
+.inputyuansuwap {
+	width: 100%;
+	height:100%;
+	background: #f7f7f7;
+}
+
+.infoyuansu {
+	height: 65px;
+	width: 100%;
+/*	background: #dcdcdc;*/
+	line-height: 65px;
+	font-size: 26px;
+}
+/*协议*/
+.infoxieyi {
+	background: #FFFFFF;
+	height: 50px;
+	width: 100%;
+}
+
+.infoxieyicenter {
+	height:50px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.infoxieyicti {
+	height: 20px;
+	width: 5px;
+	background: #1890ff;
+}
+/*时间范围*/
+.timefanwei {
+	width: 100%;
+	background: #FFFFFF;
+}
+
+.timetiteldata {
+	height: 60px;
+	width: 100%;
+}
+
+.timetitelwap {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	height: 60px;
+}
+
+.aftertime,
+.overtime{
+	float: left;
+}
+.aftertime{
+	margin-left: 10px;
+}
+
+.aftertimeinput1,
+.aftertimeinput {
+	margin-left: 10px;
+	background: none;
+	border: #999 solid 1px;
+	text-indent: 10px;
+	color: #333;
+}
+.monofile_type{
+	margin-left: 10px;
+	text-indent: 10px;
+	color: #333;
+}
+.huoqu{
+     margin-left: -82px;
+     line-height: 12px;
+}
+.sujualert {
+	height: auto;
+	line-height: 1.8;
+	padding: 15px 0px;
+	padding-left: 15px;
+}
+/*tab切换*/
+#myTab {
+	display: block;
+	vertical-align: middle;
+	text-align: center;
+	margin: 15px 0px;
+}
+
+#myTab a {
+	padding: 2px 15px;
+	border: none;
+	background: none;
+	color: #1680E4;
+}
+
+#myTab .active a{
+	background: #1680E4;
+	color: white;
+}
+
+.nav-tabs > li > a a{
+	border-radius: none !important;
+}
+.tab_span{
+	margin-left: 10px;
+}
+.tab-content{
+	background-color: #FFFFFF;
+	padding: 10px;
+}
+.tabbs p{
+	margin-left: 15px;
+	color: #666666;
+}
+.tab_p{
+	margin-top: 10px;
+}         
+/**/
+  .infoyuansu strong{
+			font-size: 16px;
+}
+
+/*模态框*/
+.modal-content {
+    margin-top: 280px;
+}
+
+.modal-body {
+    padding: 0px !important; 
+}
+.modal-footer {
+    padding: 10px ;
+    margin-top: 10px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+   /* border-bottom: 1px solid #E5E5E5;*/
+}
+.mtk_wenzi{
+	margin-left: 15px;
+	line-height: 33px;
+}
+.pevlist-selects {
+    width: 200px;
+    height: 33px;
+  /*  text-align: center;*/
+    line-height: 25px;
+    border-radius: 3px;
+    color: #b0b0b0;
+    outline: none;
+    border: 1px solid #CCCCCC !important;
+}
+.tishi{
+	color: red;
+	line-height: 36px;
+}
+.anniu{
+	/*margin-left: -160px;*/
+	float: left;
+}
+.btn-default:first-child{
+	margin-left: 0px;
+}
+.btn-default{
+	margin-left: 8px;
+}
+.anniu .btn-default:hover{
+    color:#FFFFFF !important;
+    background-color: #03a9f5 !important;
+    border-color: #03a9f5;
+}
+.anniu .btn-default:first-child{
+    color:#FFFFFF !important;
+    background-color: #03a9f5 !important;
+    border-color: #03a9f5;
+}
+.form-horizontal{
+	background: #FFFFFF;
+}
+.annius{
+	float: left;
+}
+.modal-header {
+     padding: 0px !important; 
+     border-bottom: 0px solid #e5e5e5 !important; 
+}
+.anniuy{
+	float: left;
+}
+/***/
+#RC .slider-selection {
+	background: #03a9f5;
+}
+#RC .slider-handle {
+	background:#5ab017;
+}
+
+#R {
+	width: 300px;
+}
+.slider.slider-horizontal {
+    width: 330px !important;
+    height: 20px;
+}
+.slider-handle {
+    position: absolute;
+    top: 0;
+    width: 14px !important;
+    height: 24px !important;
+    margin-top: -3px !important;
+    }
+.guanbiao_ti{
+	margin-top: 10px;
+}
+.neix{
+	margin-left: 50px;
+	color: #666666;
+}
+.tab_pj{
+	height: 30px;
+	border-bottom: 1px solid #CCCCCC;
+}
+.tab_pj:last-child{
+	border-bottom: 0px solid #CCCCCC;
+}
+
+/*分页按钮*/
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #3fa1fa;
+    border-color: #3fa1fa;
+}
+/*选择*/
+.btn-primary {
+    color: #fff;
+    background-color: #3fa1fa;
+    border-color: #3fa1fa;
+    cursor:pointer
+}
+.btn-primary:hover {
+    color: #fff;
+     background-color:  #3fa1fa; 
+     border-color:  #3fa1fa; 
+}
+tbody td{
+	color: #999999;
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 4px 8px;
+}
+.annnys{
+	float: right;

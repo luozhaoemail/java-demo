@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!--1 默认构造函数：  id表示获取到对象标识  class 创建哪个类的对象     -->
+    <bean id="peo" class="spring.pojo.People"/>
+    
+    <!--2 指定参数的构造函数：  -->
+    <bean id="peo1" class="spring.pojo.People">    
+    	<constructor-arg index="0" name="id" type="int" value="123"></constructor-arg>
+    	<constructor-arg index="1" name="name" type="java.lang.String" value="张三"></constructor-arg>
+    </bean>
+    <!--共5个参数：index，  name，  type，   ref引用另一个bean，   value 基本数据类型或String等
+     	通过这些参数去控制走哪个构造函数
+     -->
+    
+     <!--3 实例工厂     -->
+    <bean id="factory" class="spring.pojo.PeopleFactory"></bean>
+    <bean id="peo2" factory-bean="factory" factory-method="newInstance"></bean>
+        
+    <!--4 静态工厂     -->
+    <bean id="peo3" class="spring.pojo.PeopleFactory" factory-method="getStaticInstance"></bean>
+
+
+	<!--5  IoC注入: (通过 set 方法)给 Bean 的属性赋值 -->
+	<bean id="peo4" class="spring.pojo.People">
+		<property name="id" value="2222"></property>
+		<property name="name" value="注入张三 "></property>
+	</bean>
+	<bean id="peo5" class="spring.pojo.People">
+		<property name="id">
+			<value>1234</value>
+		</property>
+		<property name="name" >
+			<value>通过 set 方法hehhh</value>
+		</property>
+	</bean>
+	<bean id="peo6" class="spring.pojo.People">
+		<property name="id">
+			<value>1234</value>
+		</property>
+		<property name="name" >
+			<value>通过 set 方法hehhh</value>
+		</property>
+	</bean>
+	<!-- 复合嵌套类型:name要与对象的成员变量名一致 -->
+	<bean id="stu" class="spring.pojo.Student">
+    	<property name="name">
+    		<value>张三</value>
+    	</property>
+    	<property name="sets">
+    		<set>
+    			<value>1</value>
+    			<value>2</value>
+    			<value>3</value>
+    		</set>
+    	</property>
+    	<!-- 如果 list 只有一个值
+    		<property name="list" value="1"></property>
+    	 -->
+    	<property name="list">
+    		<list>
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+			</list>
+    	</property>
+    	<property name="strs" >
+    		<array>
+    			<value>1</value>
+    			<value>2</value>
+    			<value>3</value>
+    		</array>
+    	</property>
+    	<property name="map">
+    		<map>
+    			<entry key="key1" value="aaa" >
+    			</entry>
+    			<entry key="key2" value="bbb" >
+    			</entry>
+    		</map>
+    	</property>
+    	<!--类似于 demo.properties -->    	
+    	<property name="props">
+    		<props>
+    			<prop key="host">10.10.10.21</prop>
+    			<prop key="port">22</prop>
+    		</props>
+    	</property> 
+    	
+    	<!--嵌套对象的依赖注入 DI：Dependency Injection -->   	
+    	<property name="ple" ref="peo5"></property>
+    </bean>
+	
+	
+	
+</beans>

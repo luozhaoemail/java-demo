@@ -1,0 +1,219 @@
+@CHARSET "UTF-8";
+
+body {
+	list-style: none;
+	font-size: 12px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	/*background-image: url("../images/eg_background.jpg");*/
+}
+
+/*
+.x-table{border-collapse: collapse;width: 99%;border: 1px solid #95B8E7;margin: 5px}
+.x-table tr td{border: 1px solid #95B8E7;}
+*/
+.x-table tr {
+	line-height: 30px
+}
+
+.x-table .td-title {
+	width: 100px;
+	text-align: right;
+	color: #15428B
+}
+
+.x-table .td-content {
+	width: 180px;
+}
+
+.star {
+	color: red;
+	font-weight: bold;
+}
+
+ul {
+	margin: 0px;
+	padding: 0px
+}
+
+ul li {
+	list-style: none;
+}
+
+.clear {
+	clear: both;
+	line-height: 1px;
+}
+
+div.north {
+	height:52px;
+	background: #fff;
+	color: #3f3f3f;
+	/*background-image: url(../images/title_bg.png);*/
+	overflow: hidden;
+}
+
+div.north .nva {
+	background-image: url(../images/bs_bannercenter.jpg);
+	WIDTH: 100%;
+	background-repeat: repeat-x;
+	background-position: 0% 100%;
+	height: 28px;
+	line-height: 28px;
+	border-top: 0px solid #99BCE8;
+}
+div.header{ 
+	height: 52px;
+}
+div.header_top ul li {
+	float: left;
+	height: 27px;
+	line-height: 27px;
+	display: inline-block;
+}
+
+.south {
+	background-color: #F2F2F2;
+	height: 25px;
+	text-align: center;
+	line-height: 25px;
+	vertical-align: middle;
+	font-size: 12px;
+	font-weight: bold;
+	color: #0E2D5F;
+}
+/*重定义tree图标样式*/
+/*
+.tree-folder {
+  background: url('skins/easyui/icons/output_tree_folder.gif');
+}
+.tree-folder-open {
+  background: url('skins/easyui/icons/output_tree_folder.gif');
+}
+.tree-file {
+  background: url('skins/easyui/icons/leaf.gif');
+}
+*/
+/*******************************************************
+					表单相关
+********************************************************/
+fieldset {
+	margin: 10px;
+	padding: 10px;
+	border: #DDD 1px solid;
+}
+input {
+	
+}
+
+input.textinput {
+	font-size: 12px;
+	width: 150px;
+	line-height: 21px;
+	/*
+	border-style: solid;
+	color: #336699;
+	height: 20px;
+	border-color: #ccc; #95B8E7
+	background-color: #ffffff;
+	background:url(../images/textinput_bg.jpg) repeat-x scroll left top #ffffff;
+	*/
+}
+
+input.textinput_hover {
+	border-color: #00ccff;
+	border-width: 1px;
+	background: url(../images/textinput_bg.jpg) repeat-x scroll left top
+		#ffffff;
+}
+
+input.textinput_click {
+	border-color: #fbd45c;
+	border-width: 1px;
+	background: url(../images/textinput_bg.jpg) repeat-x scroll left top
+		#ffffff;
+}
+
+/*文本域*/
+textarea {
+	overflow: auto;
+	width: 150px;
+	height: 80px;
+	color: #000000;
+	word-break: break-all;
+	word-wrap: break-word;
+	font-size: 12px;
+	border-color: #a2b3bd;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #ffffff;
+	background: url(../images/textarea_bg.jpg) repeat-x scroll left top
+		#ffffff;
+}
+
+textarea.textarea {
+	background: url(../images/textarea_bg.jpg) repeat-x scroll left top
+		#ffffff;
+}
+
+textarea.textarea_hover {
+	background: url(../images/textarea_bg.jpg) repeat-x scroll left top
+		#ffffff;
+	border-color: #00ccff;
+}
+
+textarea.textarea_click {
+	background: url(../images/textarea_bg.jpg) repeat-x scroll left top
+		#ffffff;
+	border-color: #fbd45c;
+}
+
+/*******************************************************
+					菜     单
+********************************************************/
+.x-menu {
+	text-align: center;
+	border-bottom: 1px solid #99BBE8;
+	padding-top: 5px;
+	padding-bottom: 5px
+}
+
+.nav_icon_v_item {
+	
+}
+
+.nav_icon_v_item img {
+	border: 0px;
+	height: 40px;
+	width: 40px;
+}
+
+.nav_icon_v_item a {
+	text-align: center;
+	margin: 5px auto !important;
+	display: block;
+	width: 100px;
+	border: solid 1px #ffffff;
+}
+
+.nav_icon_v_item a:hover { /*
+	border:solid 1px #adb9c2;
+	background-image: url(titlebar_iconBg.jpg);
+	background-repeat: repeat-x;
+	text-decoration:none;
+	color:black;*/
+	background-color: #c9e5fc !important; /*鼠标移入背景色*/
+	border: solid 1px #438dce !important; /*鼠标移入边框色*/
+	color: red;
+	font-weight: bold !important;;
+}
+
+.nav_icon_v_item_text {
+	font-weight: bold !important;
+	margin-top: 3px
+}
+
+.nav_icon_v_item_text .text_slice {
+	width: 100px;
+}
