@@ -31,3 +31,17 @@ for (int i = 0; i < 10; i++) {
     }  
    });  
 }  
+
+
+可重入锁与不可重入锁
+
+
+OSI七层模型
+第7层应用层（Application）协议和应用：http,ftp,tftp,telnet,dns,smtp。此层是用户与计算机进行实际通信的地方.只是当马上就要访问网络时,才会实际上用到这一层.
+第6层表示层（Presnation）协议和应用：ebcdic,ascii,jpeg,tiff,midi,mpeg
+第5层会话层（Session）协议和应用：nfs,sql,rpc,x-windows,netbios
+
+第4层传输层（Transport 此层数据单位【段segment】）协议和应用：tcp,udp,spx
+第3层网络层（Network   此层数据单位【包packet】）协议和应用：ip,ipx,appletalk,icmp
+第2层链路层（Data Link 此层数据单位【帧Frame】）协议和应用：802.3,802.2,atm,fr
+第1层物理层（Physical此层数据单位【比特流Bit】）协议和应用：v.35,eia/tia 323       
