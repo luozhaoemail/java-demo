@@ -38,7 +38,7 @@ git fetch命令用于从另一个存储库下载对象和引用。不会自动�
 git fetch origin master  
 
 
-==========================6
+==========================6  多分支协同工作
 git branch	列出所有本地分支
 git branch  -r  列出所有远程分支
 git branch  -a  列出所有本地分支和远程分支
@@ -54,9 +54,10 @@ git commit -m '修改了readme.txt'
 
 切回本地的主分支
 git checkout master
+cat  readme.txt		发现内容并没有修改,需要手动合并分支后才能查看到更新的内容
+git merge lz		更新合并到master
+git branch -d lz	删除lz分支
 
-
-  
   
 **************  
 ==============  
