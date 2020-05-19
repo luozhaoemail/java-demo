@@ -41,7 +41,6 @@ git fetch origin master
 
 
 ==========================6  多分支协同工作
-
 git branch	列出所有本地分支  
 git branch  -r  列出所有远程分支  
 git branch  -a  列出所有本地分支和远程分支  
@@ -69,8 +68,6 @@ git status -s
   
 ==================  
 git rm <file> # 从版本库中删除文件  
-git branch 会列出你在本地的分支  
-  
 git rm <file> --cached # 从版本库中删除文件，但不删除文件  
 ==========================  
   
