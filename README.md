@@ -24,9 +24,11 @@ git commit -a  		自动将在提交前将已记录、修改的文件放入缓存
 git commit -m '注释内容'   	# -m 选项以在命令行中提供提交注释。  
   
 ==========================4  
-git push origin master # 将本地主分支推到远程主分支  
 git push -u origin master # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)  
 push后会提示输入远程仓库的账号和密码  
+
+git push origin master # 将本地主分支推到远程主分支  
+git push origin dev # 将本地主分支推到远程其他分支  
   
 ==========================5  
 再提交之前（push）必须先更新本地库（pull），否则会报错  
@@ -39,6 +41,7 @@ git fetch origin master
 
 
 ==========================6  多分支协同工作
+
 git branch	列出所有本地分支
 git branch  -r  列出所有远程分支
 git branch  -a  列出所有本地分支和远程分支
