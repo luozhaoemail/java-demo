@@ -42,9 +42,9 @@ git fetch origin master
 
 ==========================6  多分支协同工作
 
-git branch	列出所有本地分支
-git branch  -r  列出所有远程分支
-git branch  -a  列出所有本地分支和远程分支
+git branch	列出所有本地分支  
+git branch  -r  列出所有远程分支  
+git branch  -a  列出所有本地分支和远程分支  
 
 
 当前默认本地和远程都是在master分支上，我们新建一个分支lz进行编辑和提交，然后合并到本地master分支，再提交到远程master
