@@ -46,19 +46,19 @@ git branch  -r  列出所有远程分支
 git branch  -a  列出所有本地分支和远程分支  
 
 
-当前默认本地和远程都是在master分支上，我们新建一个分支lz进行编辑和提交，然后合并到本地master分支，再提交到远程master
-现在新建一个分支lz，并切换到该分支
-git checkout -b lz
+当前默认本地和远程都是在master分支上，我们新建一个分支lz进行编辑和提交，然后合并到本地master分支，再提交到远程master  
+现在新建一个分支lz，并切换到该分支  
+git checkout -b lz  
 
-修改修改了readme后提交 
-git add readme.txt 
-git commit -m '修改了readme.txt'
+修改修改了readme后提交  
+git add readme.txt  
+git commit -m '修改了readme.txt'  
 
-切回本地的主分支
-git checkout master
-cat  readme.txt		发现内容并没有修改,需要手动合并分支后才能查看到更新的内容
-git merge lz		更新合并到master
-git branch -d lz	删除lz分支
+切回本地的主分支  
+git checkout master  
+cat  readme.txt		发现内容并没有修改,需要手动合并分支后才能查看到更新的内容  
+git merge lz		更新合并到master  
+git branch -d lz	删除lz分支  
 
   
 **************  
