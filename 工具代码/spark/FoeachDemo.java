@@ -122,3 +122,14 @@ public class FoeachDemo {
 			
 	}
 }
+
+
+class MyFunction implements ForeachPartitionFunction<Row>{
+
+	@Override
+	public void call(Iterator<Row> it) throws Exception {
+		Row row = it.next();
+		System.out.println("-------call: "+row.toString());		
+	}
+
+}

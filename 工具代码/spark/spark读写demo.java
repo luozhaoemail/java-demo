@@ -1,0 +1,67 @@
+private static SparkSession spark= SparkSession
+									  .builder()
+									  .appName("TestWrite")
+									  .master("spark://bd02:7077")		  
+									  .config("spark.sql.warehouse.dir", "hdfs://bd02:9000/user/spark/warehouse")				  
+									  .config("spark.cores.max", "7")
+									  .enableHiveSupport()
+									  .getOrCreate();
+//spark.sparkContext().addJar("/root/test.jar");
+spark.sql("use 4gcheck02");
+
+
+//读：纯sql方式
+String str="select * from tb_s11 limit 1000000";
+spark.sql(str).show();//show limit 20
+List<Row> list = spark.sql(str).collectAsList();  //read
+Dataset<Row> ds = spark.sql(str).cache(); //cacahe
+
+
+//读：select 文件方式
+Dataset<Row> ds = spark.sql("SELECT * FROM parquet.`/user/spark/warehouse/4gcheck03.db/lz3`");
+
+
+//读：文件加载方式 
+String path="hdfs://master:9000//user/hive/warehouse/xdr.db/int_s1u_dns_17602/p_time=1520822940000/00000_1520822940000_742D7E7A_045748_0000_zlib.orc";
+Dataset<Row> ds = spark.read().parquet("/user/spark/warehouse/4gcheck03.db/lz3");	
+Dataset<Row> ds = spark.read().orc(path);
+
+
+//读：javaRDD1
+JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
+JavaRDD<String> rdd = jsc.textFile("/test_dir/lz3/key=1");
+JavaRDD<Email> rdd2 = rdd.map(new Function<String, Email>() {  //Email为pojo类
+	@Override
+	public Email call(String line) throws Exception {				
+		return new Email(line);
+	}
+});
+List<String> list = rdd.collect();
+
+//读：javaRDD2
+JavaRDD<Row>  s11RDD = spark.read().csv("/test/tb_s11").toJavaRDD();		
+List<Row> list  = (ArrayList<Row>) s11RDD.collect();
+
+
+
+//写：指定任意字段的分区表路径, 如果是分区表，写入后查不出来，没有分区的表可查出来。
+spark.sql(str).write().format("parquet").mode(SaveMode.Append).save("/user/spark/warehouse/4gcheck03.db/lz2/timeH='2016-09-02'");	
+spark.sql(str).write().format("parquet").mode(SaveMode.Append).save("/user/spark/warehouse/4gcheck03.db/lz1");	
+
+
+//写：任意文件目录
+spark.sql(str).write().mode(SaveMode.Append).parquet("/user/spark/warehouse/4gcheck03.db/lz1");		
+spark.sql(str).write().mode(SaveMode.Overwrite).csv("/test/tb_s11");//20.874秒 test/tb_s11是相对路径，/user/root/test/tb_s11
+
+
+//写：创建新表
+ds.write().partitionBy("time").mode(SaveMode.Append).saveAsTable("testPartition4");	
+spark.catalog().refreshTable("testPartition4");
+
+ds.repartition(7).write().mode(SaveMode.Append).saveAsTable("testPartition5");
+spark.catalog().refreshTable("testPartition5");
+
+//写：写入新表，并重分区
+spark.sql(str).write().mode(SaveMode.Overwrite).partitionBy("cell").saveAsTable("tb_partion");//22.662秒
+		
+
