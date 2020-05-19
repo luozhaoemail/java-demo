@@ -91,5 +91,11 @@ git reset –hard HEAD~100(把当前的版本回退到上100个版本)
 
 撤销上一次push操作，唯一的办法就是本地修正然后又强制推送，即：  
 git reset --hard 然后 git push -f
-==========================  
   
+
+==========================  
+Git pull push 卡死解决办法：
+使用git更新或提交中途有时出现The remote end hung up unexpectedly的异常，特别是资源库在国外的情况下。此问题可能由网络原因引起。
+解决：配置git的最低速度和最低速度时间：
+git config --global http.lowSpeedLimit 0
+git config --global http.lowSpeedTime 999999  单位 秒
