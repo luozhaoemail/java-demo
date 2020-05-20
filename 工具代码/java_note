@@ -36,6 +36,24 @@ for (int i = 0; i < 10; i++) {
 可重入锁与不可重入锁
 
 
+
+CountDownLatch同步计数器
+final CountDownLatch cdl= new CountDownLatch(ThreadNum);  //开始运行前等待n个线程执行完毕
+for(int k=1;k<=ThreadNum;k++){
+new Thread(new Runnable() {
+
+	@Override
+    public void run() {
+        //todo
+        cdl.countDown(); //每当一个任务线程执行完毕，就将计数器减1
+    }
+
+}).start();
+}
+cdl.await(); //主线程调用了await(),在当前计数到达零之前会被阻塞，当计数器的值变为0时，主线程就会被唤醒
+//todo
+
+
 OSI七层模型
 第7层应用层（Application）协议和应用：http,ftp,tftp,telnet,dns,smtp。此层是用户与计算机进行实际通信的地方.只是当马上就要访问网络时,才会实际上用到这一层.
 第6层表示层（Presnation）协议和应用：ebcdic,ascii,jpeg,tiff,midi,mpeg
