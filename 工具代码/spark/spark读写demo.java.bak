@@ -65,5 +65,3 @@ spark.catalog().refreshTable("testPartition5");
 spark.sql(str).write().mode(SaveMode.Overwrite).partitionBy("cell").saveAsTable("tb_partion");//22.662秒
 		
 
-提交方式：
-nohup spark-submit --driver-memory 8g xdrProcess.jar ../config/ >luozhao.log 2>&1 &
