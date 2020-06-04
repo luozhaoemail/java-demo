@@ -175,4 +175,51 @@ public class Sort {
 	    return left;
 	}
 
+	
+	//-------------------------------------
+	/**两路归并排序
+	 *  分治法，每个递归过程涉及三个步骤
+		第一, 分解: 把待排序的 n 个元素的序列分解成两个子序列, 每个子序列包括 n/2 个元素.
+		第二, 治理: 对每个子序列分别调用归并排序MergeSort, 进行递归操作 
+				   递归回溯时：划分到最后时，子表表长L=1；不断地使 L=2*L ，进行子表处理，直到 L>=n 为止
+		第三, 合并: 合并两个排好序的子序列,生成排序结果.
+	
+	时间复杂度：O(nlgn)
+	空间复杂度：O(n)
+	 */
+	public static void sort(int [] a,int low,int high){
+
+		if(low<high){//当子序列中只有一个元素时结束递归
+		    int mid=(low+high)/2;//划分子序列
+		    sort(a, low, mid);//对左侧子序列进行递归排序，到只剩1个元素退出
+		    sort(a, mid+1, high);//对右侧子序列进行递归排序，到只剩1个元素退出
+
+		    merge(a, low, mid, high);//左右都只剩1个元素，回溯到上一层，有两个元素[0,1]
+		}
+	}
+	
+	public static void merge(int []a, int low, int mid, int high){
+		int []tmp = new int[a.length];//辅助数组
+		int i = low;
+		int j = mid+1;
+		int k = low;//p1、p2是检测指针，k是存放指针
+
+		while(i<=mid && j<=high){
+		    if(a[i]<=a[j])
+			tmp[k++]=a[i++];  //a[i]小,复制到tmp[k]
+		    else
+			tmp[k++]=a[j++];  //a[j]小，复制到tmp[k]
+		}
+
+		while(i<=mid) 
+			tmp[k++]=a[i++];  //直接将后面所有元素加到合并的序列中
+
+		while(j<=high) 
+			tmp[k++]=a[j++];  // 直接将后面所有元素加到合并的序列中
+
+		//把新数组中的数复制回原数组
+		for (int x=low; x<=high; x++) 
+		    a[x] = tmp[x];
+	    }
+
 }
