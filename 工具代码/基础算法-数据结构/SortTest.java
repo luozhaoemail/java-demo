@@ -7,7 +7,7 @@ public class SortTest {
 
 	public static void main(String[] args) throws Exception
 	{
-		String tb_imsi="E:/研二/实验/2 改进大表关联算法/data/s4.txt";
+		String tb_imsi="E:/研二/实验/2 改进算法/data/s4.txt";
 		long start = System.currentTimeMillis();
 		List<String> list = read();
 		String[] ar = list.toArray(new String[list.size()]);
@@ -80,7 +80,7 @@ public class SortTest {
 	public static List<String> read() throws Exception
 	{
 		long start = System.currentTimeMillis();
-		String tb_imsi="E:/研二/实验/2 改进大表关联算法/data/imsi.txt";
+		String tb_imsi="E:/研二/实验/2 改进算法/data/imsi.txt";
 		List<String> list = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new FileReader(tb_imsi));
 		String str = "";
@@ -97,8 +97,8 @@ public class SortTest {
 	public static void change() throws Exception
 	{
 		long start = System.currentTimeMillis();
-		String tb_im="E:/研二/实验/2 改进大表关联算法/data/im.txt";
-		String tb_imsi="E:/研二/实验/2 改进大表关联算法/data/imsi.txt";
+		String tb_im="E:/研二/实验/2 改进算法/data/im.txt";
+		String tb_imsi="E:/研二/实验/2 改进算法/data/imsi.txt";
 		List<Long> list = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new FileReader(tb_im));
 		String str = "";
