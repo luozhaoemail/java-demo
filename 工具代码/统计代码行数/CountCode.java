@@ -19,7 +19,7 @@ public class CountCode
 {
 	public static void main(String[] args) throws Exception 
 	{			
-		File dir = new File("E:\\研三\\罗昭毕业材料\\实验\\代码\\check4G");//bigdataweb check4G
+		File dir = new File("E:\\研三\\毕业材料\\实验\\代码\\check4G");//bigdataweb check4G
 		List<File> list =  new ArrayList<File>();
 		fileList(dir,list);  //1 获取所有txt文件，递归获取子文件
 		int x=0;
